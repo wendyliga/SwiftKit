@@ -23,6 +23,7 @@
  */
 
 extension Result {
+    /// Get non success Result, if current Result is success return nil, if not return self
     public var nonSuccessResult: Self? {
         if case .failure(_) = self {
             return self
@@ -31,6 +32,7 @@ extension Result {
         return nil
     }
     
+    /// Get non failure Result, if current Result is failure return nil, if not return self
     public var nonFailureResult: Self? {
         if case .success(_) = self {
             return self
@@ -39,10 +41,12 @@ extension Result {
         return nil
     }
     
+    /// Force get value from Result, make sure you make sure your Result is not failure.
     public var value: Success! {
         return try! self.get()
     }
     
+    /// Get error value from Result
     public var error: Error! {
         do {
             let result = try self.get()

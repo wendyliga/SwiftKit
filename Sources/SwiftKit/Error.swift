@@ -24,8 +24,17 @@
 
 import Foundation
 
-public enum GeneralError: Error, LocalizedError {
+public enum GeneralError: Error, LocalizedError, Equatable {
+    /**
+     Multiple Error Generalization
+     
+     with this you can output one error from several errors
+     */
     case multipleError([Error])
+    
+    /**
+     Default unidentified Error
+     */
     case unidentifiedError
     
     public var errorDescription: String? {
@@ -35,5 +44,21 @@ public enum GeneralError: Error, LocalizedError {
         case .unidentifiedError:
             return "Unidentified Error"
         }
+    }
+    
+    private var rawValue: Int {
+        switch self {
+        case .unidentifiedError:
+            return 0
+        /**
+         need more improvement, as array of error should be checked
+         */
+        case .multipleError:
+            return 1
+        }
+    }
+    
+    public static func == (lhs: GeneralError, rhs: GeneralError) -> Bool {
+        return lhs.rawValue == rhs.rawValue
     }
 }
