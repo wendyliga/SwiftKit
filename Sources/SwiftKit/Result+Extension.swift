@@ -57,5 +57,13 @@ extension Result {
             return error
         }
     }
+    
+    /// Get result value and discard the returnable value
+    ///
+    /// This function is wrapper of `get` function with discardable result
+    @discardableResult
+    public func getAndForget() throws -> Success {
+        try get()
+    }
 }
 
