@@ -40,6 +40,8 @@ internal final class StringTests: XCTestCase {
         ("test_withoutPrefix_withEmptyString", test_withoutPrefix_withEmptyString),
         ("test_withoutSuffix_withValidString", test_withoutSuffix_withValidString),
         ("test_withoutSuffix_withEmptyString", test_withoutSuffix_withEmptyString),
+        ("test_noWhiteSpace", test_noWhiteSpace),
+        ("test_capitalizeFirstLetter", test_capitalizeFirstLetter)
     ]
     
     internal func test_withPrefixIdentation_withValidIdentation() {
@@ -124,5 +126,26 @@ internal final class StringTests: XCTestCase {
         XCTAssertEqual(string.withoutSuffix("$10"), "")
         XCTAssertEqual(string.withoutSuffix("#"), "")
         XCTAssertEqual(string.withoutSuffix("...", replaceWith: "___"), "")
+    }
+    
+    internal func test_noWhiteSpace() {
+        let string = "this is whitespace"
+        let noWhiteSpace = "hello"
+        
+        XCTAssertEqual(string.noWhiteSpace(replace: .none), "thisiswhitespace")
+        XCTAssertEqual(string.noWhiteSpace(replace: .camelCase), "ThisIsWhitespace")
+        XCTAssertEqual(string.noWhiteSpace(replace: .snakeCase), "this_is_whitespace")
+        
+        XCTAssertEqual(noWhiteSpace.noWhiteSpace(replace: .none), "hello")
+        XCTAssertEqual(noWhiteSpace.noWhiteSpace(replace: .camelCase), "Hello")
+        XCTAssertEqual(noWhiteSpace.noWhiteSpace(replace: .snakeCase), "hello")
+    }
+    
+    internal func test_capitalizeFirstLetter() {
+        let string = "wendy"
+        let already = "String"
+        
+        XCTAssertEqual(string.capitalizeFirstLetter(), "Wendy")
+        XCTAssertEqual(already.capitalizeFirstLetter(), "String")
     }
 }

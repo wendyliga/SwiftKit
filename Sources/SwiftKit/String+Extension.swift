@@ -24,6 +24,12 @@
 
 import Foundation
 
+public enum NoWhiteSpaceReplacer {
+    case none
+    case camelCase
+    case snakeCase
+}
+
 extension String {
     /**
      String that's not empty will be true
@@ -160,9 +166,36 @@ extension String {
     
     /**
      remote white space inside `String`
+     
+     with several mode
+        - none : will vanish all white space like "This is Amazing" into "ThisIsAmazing"
+        - camelCase: remove whitespace and make sure every first character of words seperated with white space will be capitalized like "my name is wendy" into "MyNameIsWendy"
+        - snakeCase: replace whitespace with _ like "hello world" into "hello_world"
      */
-    public func removeWhiteSpace() -> String{
-        return self.replacingOccurrences(of: " ", with: "")
+    public func noWhiteSpace(replace with: NoWhiteSpaceReplacer) -> String {
+        switch with {
+        case .none:
+            return replacingOccurrences(of: " ", with: "")
+        case .camelCase:
+            return split(separator: " ")
+                .map { character -> String in
+                    String(character).capitalizeFirstLetter()
+                }
+                .joined()
+        case .snakeCase:
+            return replacingOccurrences(of: " ", with: "_")
+        }
+    }
+    
+    /**
+     Capitalize first letter
+     
+     Example:
+        string -> String
+        wendy -> Wendy
+     */
+    public func capitalizeFirstLetter() -> String {
+        return prefix(1).uppercased() + self.lowercased().dropFirst()
     }
 }
 
