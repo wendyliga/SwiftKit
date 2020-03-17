@@ -195,7 +195,7 @@ extension String {
         wendy -> Wendy
      */
     public func capitalizeFirstLetter() -> String {
-        return prefix(1).uppercased() + self.lowercased().dropFirst()
+        return prefix(1).uppercased() + self.dropFirst()
     }
 }
 
