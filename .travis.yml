@@ -1,11 +1,11 @@
-env:
-  global:
-    - SWIFT_BRANCH=swift-5.1-release
-    - SWIFT_VERSION=swift-5.1-RELEASE
+# env:
+#   global:
+#     - SWIFT_BRANCH=swift-5.1-release
+#     - SWIFT_VERSION=swift-5.1-RELEASE
 
-gemfile: Gemfile
-cache:
-  - bundler
+# gemfile: Gemfile
+# cache:
+#   - bundler
 
 jobs:
   include:
@@ -35,23 +35,23 @@ jobs:
   #   script:
   #     - xcodebuild test -scheme SwiftKit | bundle exec xcpretty -f `xcpretty-travis-formatter`
 
-  - name: Generate Documentation
-    if: branch = master AND type != pull_request
-    os: osx
-    osx_image: xcode11.3
-    language: swift
-    before_script:
-      - set -o pipefail
-    script:
-      - swift package generate-xcodeproj
-      - bundle exec jazzy
-    deploy:
-      provider: pages
-      skip-cleanup: true
-      github-token: $GITHUB_PUBLIC_REPO_KEY
-      local-dir: docs
-      on:
-        branch: master
+  # - name: Generate Documentation
+  #   if: branch = master AND type != pull_request
+  #   os: osx
+  #   osx_image: xcode11.3
+  #   language: swift
+  #   before_script:
+  #     - set -o pipefail
+  #   script:
+  #     - swift package generate-xcodeproj
+  #     - bundle exec jazzy
+  #   deploy:
+  #     provider: pages
+  #     skip-cleanup: true
+  #     github-token: $GITHUB_PUBLIC_REPO_KEY
+  #     local-dir: docs
+  #     on:
+  #       branch: master
 
   - name: Add Tags
     script:
