@@ -1,0 +1,30 @@
+clean: true
+objc: false
+
+author: Wendy Liga
+author_url: https://github.com/wendyliga
+github_url: https://github.com/wendyliga/SwiftKit
+github_file_prefix: https://github.com/wendyliga/SwiftKit/tree/master
+copyright: '© 2019 [Wendy Liga](https://github.com/wendyliga) under [open source license](https://github.com/wendyliga/SwiftKit/blob/master/LICENSE).'
+
+theme: apple
+
+module: SwiftKit
+
+xcodebuild_arguments:  
+  # - -project
+  # - DeclarativeKit.xcodeproj
+  - -scheme
+  - SwiftKit
+
+skip_undocumented: false
+
+# custom_categories:
+#   - name: Views
+#     children:
+#       - UIView
+#       - UIButton
+#       - UIControl
+#       - UIImageView
+#       - UILabel
+#       - UIStackView

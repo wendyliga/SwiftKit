@@ -34,3 +34,6 @@ jobs:
       - gem install xcpretty-travis-formatter
     script:
       - xcodebuild test -scheme SwiftKit | xcpretty -f `xcpretty-travis-formatter`
+    after_success:
+      - gem install jazzy && jazzy
+
