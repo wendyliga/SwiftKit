@@ -19,7 +19,7 @@ Collection of Swift Helper and Utilities
 Using the Swift Package Manager
 
 ```
-.package(url: "https://github.com/wendyliga/SwiftKit.git", from: "1.0.0")
+.package(url: "https://github.com/wendyliga/SwiftKit.git", from: "2.0.0")
 ```
 
 ## License
