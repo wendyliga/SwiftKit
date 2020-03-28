@@ -56,8 +56,9 @@ jobs:
   - name: Add Tags
     os: linux
     language: generic
-    dist: xenial
+    dist: xenialg
     script:
+      - echo "Hello World"
       - echo "$TRAVIS_COMMIT_MESSAGE"
 
 notifications:
