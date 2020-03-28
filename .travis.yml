@@ -6,11 +6,14 @@ env:
 jobs:
   include:
   - name: "Linux test"
+    phase: Preparing
     os: linux
     language: generic
     dist: xenial
     before_script:
       - set -o pipefail
+    
+    phase: Installing Swift
     install:
       - sudo apt-get install clang libcurl3 libcurl4-openssl-dev libpython2.7 libpython2.7-dev
         libicu-dev libstdc++6
@@ -18,6 +21,8 @@ jobs:
         > $SWIFT_VERSION-ubuntu16.04.tar.gz
       - tar xzf $SWIFT_VERSION-ubuntu16.04.tar.gz
       - export PATH="$(pwd)/$SWIFT_VERSION-ubuntu16.04/usr/bin:$PATH"
+
+    phase: Testing
     script:
       - swift package update
       - swift test
