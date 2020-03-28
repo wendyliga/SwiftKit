@@ -32,10 +32,8 @@ jobs:
     language: swift
     before_script:
       - set -o pipefail
-    install:
-      - gem install xcpretty-travis-formatter
     script:
-      - xcodebuild test -scheme SwiftKit | xcpretty -f `xcpretty-travis-formatter`
+      - xcodebuild test -scheme SwiftKit | bundle exec xcpretty -f `xcpretty-travis-formatter`
 
   - name: Generate Documentation
     if: branch = master AND type != pull_request
