@@ -3,6 +3,14 @@ env:
     - SWIFT_BRANCH=swift-5.1-release
     - SWIFT_VERSION=swift-5.1-RELEASE
 
+deploy:
+  provider: pages
+  skip-cleanup: true
+  github-token: $GITHUB_PUBLIC_REPO_KEY
+  local-dir: docs
+  on:
+    branch: master
+    
 jobs:
   include:
   - stage: Linux test
@@ -35,5 +43,6 @@ jobs:
     script:
       - xcodebuild test -scheme SwiftKit | xcpretty -f `xcpretty-travis-formatter`
     after_success:
-      - gem install jazzy && jazzy
+      # only execute automatic generate and deploy jazzy docs on master and not PR
+      - test $TRAVIS_BRANCH = "master" && test $TRAVIS_PULL_REQUEST = "false" && swift package generate-xcodeproj && gem install jazzy && jazzy
 

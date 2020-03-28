@@ -12,19 +12,9 @@ theme: apple
 module: SwiftKit
 
 xcodebuild_arguments:  
-  # - -project
-  # - DeclarativeKit.xcodeproj
-  - -scheme
+  - -project
+  - SwiftKit.xcodeproj
+  - -targeto
   - SwiftKit
 
 skip_undocumented: false
-
-# custom_categories:
-#   - name: Views
-#     children:
-#       - UIView
-#       - UIButton
-#       - UIControl
-#       - UIImageView
-#       - UILabel
-#       - UIStackView
