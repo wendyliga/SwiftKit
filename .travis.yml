@@ -1,24 +1,32 @@
-os:
-- osx
-- linux
-language: swift
-sudo: required
-dist: trusty
-osx_image: xcode11.3
 env:
-  - SWIFT_VERSION=5.2-SNAPSHOT-2020-01-06-a
+  global:
+  - SWIFT_BRANCH=swift-5.1-release
+  - SWIFT_VERSION=swift-5.1-RELEASE
 
-addons:
-  apt:
-    packages:
-      - graphviz
-
-install:
-  - if [ "$TRAVIS_OS_NAME" = "osx" ]; then gem install xcpretty-travis-formatter; fi
-  - if [ "$TRAVIS_OS_NAME" = "linux" ]; then eval "$(curl -sL https://swiftenv.fuller.li/install.sh)"; fi
-
-script:
-- swift --version
-- swift build
-- swift test
-- if [[ "$TRAVIS_OS_NAME" == "osx" ]]; then xcodebuild test -scheme SwiftKit | xcpretty -f `xcpretty-travis-formatter` && exit ${PIPESTATUS[0]}; fi
+jobs:
+  include:
+  - stage: Linux test
+    os: linux
+    language: generic
+    dist: xenial
+    sudo: required
+    install:
+    - sudo apt-get install clang libcurl3 libcurl4-openssl-dev libpython2.7 libpython2.7-dev
+      libicu-dev libstdc++6
+    - curl https://swift.org/builds/$SWIFT_BRANCH/ubuntu1604/$SWIFT_VERSION/$SWIFT_VERSION-ubuntu16.04.tar.gz
+      > $SWIFT_VERSION-ubuntu16.04.tar.gz
+    - tar xzf $SWIFT_VERSION-ubuntu16.04.tar.gz
+    - export PATH="$(pwd)/$SWIFT_VERSION-ubuntu16.04/usr/bin:$PATH"
+    script:
+    - swift package update
+    - swift test
+    
+  - stage: OSX test
+    os: osx
+    osx_image: xcode11.3
+    language: swift
+    sudo: required
+    install:
+    - gem install xcpretty-travis-formatter
+    script:
+    - xcodebuild test -scheme SwiftKit | xcpretty -f `xcpretty-travis-formatter`
