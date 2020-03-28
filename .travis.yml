@@ -9,31 +9,31 @@ cache:
 
 jobs:
   include:
-  - name: "Linux test"
-    os: linux
-    language: generic
-    dist: xenial
-    before_script:
-      - set -o pipefail
-    install:
-      - sudo apt-get install clang libcurl3 libcurl4-openssl-dev libpython2.7 libpython2.7-dev
-        libicu-dev libstdc++6
-      - curl https://swift.org/builds/$SWIFT_BRANCH/ubuntu1604/$SWIFT_VERSION/$SWIFT_VERSION-ubuntu16.04.tar.gz
-        > $SWIFT_VERSION-ubuntu16.04.tar.gz
-      - tar xzf $SWIFT_VERSION-ubuntu16.04.tar.gz
-      - export PATH="$(pwd)/$SWIFT_VERSION-ubuntu16.04/usr/bin:$PATH"
-    script:
-      - swift package update
-      - swift test
+  # - name: "Linux test"
+  #   os: linux
+  #   language: generic
+  #   dist: xenial
+  #   before_script:
+  #     - set -o pipefail
+  #   install:
+  #     - sudo apt-get install clang libcurl3 libcurl4-openssl-dev libpython2.7 libpython2.7-dev
+  #       libicu-dev libstdc++6
+  #     - curl https://swift.org/builds/$SWIFT_BRANCH/ubuntu1604/$SWIFT_VERSION/$SWIFT_VERSION-ubuntu16.04.tar.gz
+  #       > $SWIFT_VERSION-ubuntu16.04.tar.gz
+  #     - tar xzf $SWIFT_VERSION-ubuntu16.04.tar.gz
+  #     - export PATH="$(pwd)/$SWIFT_VERSION-ubuntu16.04/usr/bin:$PATH"
+  #   script:
+  #     - swift package update
+  #     - swift test
 
-  - name: "OSX test"
-    os: osx
-    osx_image: xcode11.3
-    language: swift
-    before_script:
-      - set -o pipefail
-    script:
-      - xcodebuild test -scheme SwiftKit | bundle exec xcpretty -f `xcpretty-travis-formatter`
+  # - name: "OSX test"
+  #   os: osx
+  #   osx_image: xcode11.3
+  #   language: swift
+  #   before_script:
+  #     - set -o pipefail
+  #   script:
+  #     - xcodebuild test -scheme SwiftKit | bundle exec xcpretty -f `xcpretty-travis-formatter`
 
   - name: Generate Documentation
     if: branch = master AND type != pull_request
@@ -52,6 +52,10 @@ jobs:
       local-dir: docs
       on:
         branch: master
+
+  - name: Add Tags
+    script:
+      - echo "$TRAVIS_COMMIT"
 
 notifications:
   email:
