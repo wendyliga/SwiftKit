@@ -6,52 +6,52 @@ env:
 jobs:
   include:
   - stage: Linux test
-      os: linux
-      language: generic
-      dist: xenial
-      sudo: required
-      before_script:
-        - set -o pipefail
-      install:
-        - sudo apt-get install clang libcurl3 libcurl4-openssl-dev libpython2.7 libpython2.7-dev
-          libicu-dev libstdc++6
-        - curl https://swift.org/builds/$SWIFT_BRANCH/ubuntu1604/$SWIFT_VERSION/$SWIFT_VERSION-ubuntu16.04.tar.gz
-          > $SWIFT_VERSION-ubuntu16.04.tar.gz
-        - tar xzf $SWIFT_VERSION-ubuntu16.04.tar.gz
-        - export PATH="$(pwd)/$SWIFT_VERSION-ubuntu16.04/usr/bin:$PATH"
-      script:
-        - swift package update
-        - swift test
+    os: linux
+    language: generic
+    dist: xenial
+    sudo: required
+    before_script:
+      - set -o pipefail
+    install:
+      - sudo apt-get install clang libcurl3 libcurl4-openssl-dev libpython2.7 libpython2.7-dev
+        libicu-dev libstdc++6
+      - curl https://swift.org/builds/$SWIFT_BRANCH/ubuntu1604/$SWIFT_VERSION/$SWIFT_VERSION-ubuntu16.04.tar.gz
+        > $SWIFT_VERSION-ubuntu16.04.tar.gz
+      - tar xzf $SWIFT_VERSION-ubuntu16.04.tar.gz
+      - export PATH="$(pwd)/$SWIFT_VERSION-ubuntu16.04/usr/bin:$PATH"
+    script:
+      - swift package update
+      - swift test
 
   - stage: OSX test
-      os: osx
-      osx_image: xcode11.3
-      language: swift
-      sudo: required
-      before_script:
-        - set -o pipefail
-      install:
-        - gem install xcpretty-travis-formatter
-      script:
-        - xcodebuild test -scheme SwiftKit | xcpretty -f `xcpretty-travis-formatter`
+    os: osx
+    osx_image: xcode11.3
+    language: swift
+    sudo: required
+    before_script:
+      - set -o pipefail
+    install:
+      - gem install xcpretty-travis-formatter
+    script:
+      - xcodebuild test -scheme SwiftKit | xcpretty -f `xcpretty-travis-formatter`
 
   if: branch = master
   - stage: Generate Documentation
-      os: osx
-      osx_image: xcode11.3
-      language: swift
-      sudo: required
-      before_script:
-        - set -o pipefail
-      install:
-        - gem install jazzy
-      script:
-        - swift package generate-xcodeproj
-        - jazzy
-      deploy:
-        provider: pages
-        skip-cleanup: true
-        github-token: $GITHUB_PUBLIC_REPO_KEY
-        local-dir: docs
-        on:
-          branch: master
+    os: osx
+    osx_image: xcode11.3
+    language: swift
+    sudo: required
+    before_script:
+      - set -o pipefail
+    install:
+      - gem install jazzy
+    script:
+      - swift package generate-xcodeproj
+      - jazzy
+    deploy:
+      provider: pages
+      skip-cleanup: true
+      github-token: $GITHUB_PUBLIC_REPO_KEY
+      local-dir: docs
+      on:
+        branch: master
