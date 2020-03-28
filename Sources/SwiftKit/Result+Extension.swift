@@ -23,39 +23,22 @@
  */
 
 extension Result {
-    /// Get non success Result, if current Result is success return nil, if not return self
-    public var nonSuccessResult: Self? {
-        if case .failure(_) = self {
-            return self
-        }
-        
-        return nil
-    }
-    
-    /// Get non failure Result, if current Result is failure return nil, if not return self
-    public var nonFailureResult: Self? {
-        if case .success(_) = self {
-            return self
-        }
-        
-        return nil
-    }
-    
-    /// Force get value from Result, make sure you make sure your Result is not failure.
-    public var value: Success! {
-        return try! self.get()
-    }
-    
-    /// Get error value from Result
-    public var error: Error! {
-        do {
-            let result = try self.get()
-            
-            assertionFailure("\(result) is not failure")
-            return GeneralError.unidentifiedError
-        } catch let error {
+    /// Get Failed value
+    public var failureValue: Failure? {
+        if case let .failure(error) = self {
             return error
         }
+        
+        return nil
+    }
+    
+    /// Get Success value
+    public var successValue: Success? {
+        if case let .success(value) = self {
+            return value
+        }
+        
+        return nil
     }
     
     /// Get result value and discard the returnable value

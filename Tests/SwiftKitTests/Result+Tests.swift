@@ -28,11 +28,10 @@ import XCTest
 
 internal final class ResultTests: XCTestCase {
     internal static var allTests = [
-        ("test_nonSuccessResult_onSuccessResult", test_nonSuccessResult_onSuccessResult),
-        ("test_nonSuccessResult_onFailureResult", test_nonSuccessResult_onFailureResult),
-        ("test_nonFailureResult_onSuccessResult", test_nonFailureResult_onSuccessResult),
-        ("test_nonFailureResult_onFailureResult", test_nonFailureResult_onFailureResult),
-        ("test_value_onSuccessResult", test_value_onSuccessResult),
+        ("test_successValue_onSuccessResult", test_successValue_onSuccessResult),
+        ("test_successValue_onFailureResult", test_successValue_onFailureResult),
+        ("test_failureValue_onSuccessResult", test_failureValue_onSuccessResult),
+        ("test_failureValue_onFailureResult", test_failureValue_onFailureResult),
     ]
     
     internal func dummySuccessResult() -> Result<Int, GeneralError> {
@@ -43,23 +42,19 @@ internal final class ResultTests: XCTestCase {
         return .failure(GeneralError.unidentifiedError)
     }
     
-    internal func test_nonSuccessResult_onSuccessResult() {
-        XCTAssertEqual(dummySuccessResult().nonSuccessResult, nil)
+    internal func test_successValue_onSuccessResult() {
+        XCTAssertEqual(dummySuccessResult().successValue, 0)
     }
     
-    internal func test_nonSuccessResult_onFailureResult() {
-        XCTAssertEqual(dummyFailureResult().nonSuccessResult, dummyFailureResult())
+    internal func test_successValue_onFailureResult() {
+        XCTAssertEqual(dummyFailureResult().successValue, nil)
     }
     
-    internal func test_nonFailureResult_onSuccessResult() {
-        XCTAssertEqual(dummySuccessResult().nonFailureResult, dummySuccessResult())
+    internal func test_failureValue_onSuccessResult() {
+        XCTAssertEqual(dummySuccessResult().failureValue, nil)
     }
     
-    internal func test_nonFailureResult_onFailureResult() {
-        XCTAssertEqual(dummyFailureResult().nonFailureResult, nil)
-    }
-    
-    internal func test_value_onSuccessResult() {
-        XCTAssertEqual(dummySuccessResult().value, 0)
+    internal func test_failureValue_onFailureResult() {
+        XCTAssertEqual(dummyFailureResult().failureValue, GeneralError.unidentifiedError)
     }
 }
