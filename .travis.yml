@@ -1,7 +1,7 @@
 env:
   global:
-  - SWIFT_BRANCH=swift-5.1-release
-  - SWIFT_VERSION=swift-5.1-RELEASE
+    - SWIFT_BRANCH=swift-5.1-release
+    - SWIFT_VERSION=swift-5.1-RELEASE
 
 jobs:
   include:
@@ -10,23 +10,27 @@ jobs:
     language: generic
     dist: xenial
     sudo: required
+    before_script:
+      - set -o pipefail
     install:
-    - sudo apt-get install clang libcurl3 libcurl4-openssl-dev libpython2.7 libpython2.7-dev
-      libicu-dev libstdc++6
-    - curl https://swift.org/builds/$SWIFT_BRANCH/ubuntu1604/$SWIFT_VERSION/$SWIFT_VERSION-ubuntu16.04.tar.gz
-      > $SWIFT_VERSION-ubuntu16.04.tar.gz
-    - tar xzf $SWIFT_VERSION-ubuntu16.04.tar.gz
-    - export PATH="$(pwd)/$SWIFT_VERSION-ubuntu16.04/usr/bin:$PATH"
+      - sudo apt-get install clang libcurl3 libcurl4-openssl-dev libpython2.7 libpython2.7-dev
+        libicu-dev libstdc++6
+      - curl https://swift.org/builds/$SWIFT_BRANCH/ubuntu1604/$SWIFT_VERSION/$SWIFT_VERSION-ubuntu16.04.tar.gz
+        > $SWIFT_VERSION-ubuntu16.04.tar.gz
+      - tar xzf $SWIFT_VERSION-ubuntu16.04.tar.gz
+      - export PATH="$(pwd)/$SWIFT_VERSION-ubuntu16.04/usr/bin:$PATH"
     script:
-    - swift package update
-    - swift test
-    
+      - swift package update
+      - swift test
+
   - stage: OSX test
     os: osx
     osx_image: xcode11.3
     language: swift
     sudo: required
+    before_script:
+      - set -o pipefail
     install:
-    - gem install xcpretty-travis-formatter
+      - gem install xcpretty-travis-formatter
     script:
-    - xcodebuild test -scheme SwiftKit | xcpretty -f `xcpretty-travis-formatter`
+      - xcodebuild test -scheme SwiftKit | xcpretty -f `xcpretty-travis-formatter`
