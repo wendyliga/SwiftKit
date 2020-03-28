@@ -5,7 +5,7 @@ env:
     
 jobs:
   include:
-  - stage: Linux test
+  - name: "Linux test"
     os: linux
     language: generic
     dist: xenial
@@ -22,7 +22,7 @@ jobs:
       - swift package update
       - swift test
 
-  - stage: OSX test
+  - name: "OSX test"
     os: osx
     osx_image: xcode11.3
     language: swift
@@ -33,7 +33,7 @@ jobs:
     script:
       - xcodebuild test -scheme SwiftKit | xcpretty -f `xcpretty-travis-formatter`
 
-  - stage: Generate Documentation
+  - name: Generate Documentation
     if: branch = master AND type != pull_request
     os: osx
     osx_image: xcode11.3
