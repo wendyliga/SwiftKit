@@ -23,6 +23,45 @@
  */
 
 extension Result {
+    /// Get non success Result, if current Result is success return nil, if not return self
+    @available(*, deprecated, message: "Will be removed at version 3")
+    public var nonSuccessResult: Self? {
+        if case .failure(_) = self {
+            return self
+        }
+        
+        return nil
+    }
+    
+    /// Get non failure Result, if current Result is failure return nil, if not return self
+    @available(*, deprecated, message: "Will be removed at version 3")
+    public var nonFailureResult: Self? {
+        if case .success(_) = self {
+            return self
+        }
+        
+        return nil
+    }
+    
+    /// Force get value from Result, make sure you make sure your Result is not failure.
+    @available(*, deprecated, renamed: "successValue")
+    public var value: Success! {
+        return try! self.get()
+    }
+    
+    /// Get error value from Result
+    @available(*, deprecated, renamed: "failureValue")
+    public var error: Error! {
+        do {
+            let result = try self.get()
+            
+            assertionFailure("\(result) is not failure")
+            return GeneralError.unidentifiedError
+        } catch let error {
+            return error
+        }
+    }
+    
     /// Get Failed value
     public var failureValue: Failure? {
         if case let .failure(error) = self {
