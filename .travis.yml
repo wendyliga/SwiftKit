@@ -9,7 +9,6 @@ jobs:
     os: linux
     language: generic
     dist: xenial
-    sudo: required
     before_script:
       - set -o pipefail
     install:
@@ -27,7 +26,6 @@ jobs:
     os: osx
     osx_image: xcode11.3
     language: swift
-    sudo: required
     before_script:
       - set -o pipefail
     install:
@@ -40,7 +38,6 @@ jobs:
     os: osx
     osx_image: xcode11.3
     language: swift
-    sudo: required
     before_script:
       - set -o pipefail
     install:
@@ -48,10 +45,10 @@ jobs:
     script:
       - swift package generate-xcodeproj
       - jazzy
-    # deploy:
-    #   provider: pages
-    #   skip-cleanup: true
-    #   github-token: $GITHUB_PUBLIC_REPO_KEY
-    #   local-dir: docs
-    #   on:
-    #     branch: master
+    deploy:
+      provider: pages
+      skip-cleanup: true
+      github-token: $GITHUB_PUBLIC_REPO_KEY
+      local-dir: docs
+      on:
+        branch: master

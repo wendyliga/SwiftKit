@@ -14,7 +14,7 @@ module: SwiftKit
 xcodebuild_arguments:  
   - -project
   - SwiftKit.xcodeproj
-  - -targeto
+  - -target
   - SwiftKit
 
 skip_undocumented: false
