@@ -54,6 +54,9 @@ jobs:
   #       branch: master
 
   - name: Add Tags
+    os: linux
+    language: generic
+    dist: xenial
     script:
       - echo "$TRAVIS_COMMIT_MESSAGE"
 
