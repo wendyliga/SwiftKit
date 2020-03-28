@@ -3,21 +3,16 @@ env:
     - SWIFT_BRANCH=swift-5.1-release
     - SWIFT_VERSION=swift-5.1-RELEASE
 
-deploy:
-  provider: pages
-  skip-cleanup: true
-  github-token: $GITHUB_PUBLIC_REPO_KEY
-  local-dir: docs
-  on:
-    branch: master
-    
+gemfile: Gemfile
+cache:
+  - bundler
+
 jobs:
   include:
-  - stage: Linux test
+  - name: "Linux test"
     os: linux
     language: generic
     dist: xenial
-    sudo: required
     before_script:
       - set -o pipefail
     install:
@@ -31,18 +26,34 @@ jobs:
       - swift package update
       - swift test
 
-  - stage: OSX test
+  - name: "OSX test"
     os: osx
     osx_image: xcode11.3
     language: swift
-    sudo: required
     before_script:
       - set -o pipefail
-    install:
-      - gem install xcpretty-travis-formatter
     script:
-      - xcodebuild test -scheme SwiftKit | xcpretty -f `xcpretty-travis-formatter`
-    after_success:
-      # only execute automatic generate and deploy jazzy docs on master and not PR
-      - test $TRAVIS_BRANCH = "master" && test $TRAVIS_PULL_REQUEST = "false" && swift package generate-xcodeproj && gem install jazzy && jazzy
+      - xcodebuild test -scheme SwiftKit | bundle exec xcpretty -f `xcpretty-travis-formatter`
 
+  - name: Generate Documentation
+    if: branch = master AND type != pull_request
+    os: osx
+    osx_image: xcode11.3
+    language: swift
+    before_script:
+      - set -o pipefail
+    script:
+      - swift package generate-xcodeproj
+      - bundle exec jazzy
+    deploy:
+      provider: pages
+      skip-cleanup: true
+      github-token: $GITHUB_PUBLIC_REPO_KEY
+      local-dir: docs
+      on:
+        branch: master
+
+notifications:
+  email:
+    on_success: never
+    on_failure: always
