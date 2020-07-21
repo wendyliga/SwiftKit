@@ -15,6 +15,9 @@
 
 Collection of Swift Helper and Utilities
 
+## Documentation
+[wendyliga.github.io/swiftkit](wendyliga.github.io/swiftkit)
+
 ## Installation
 Using the Swift Package Manager
 
