@@ -31,61 +31,74 @@ import Foundation
  */
 @propertyWrapper
 internal struct Traceable<Type> {
+    private let maxSize: Int
+
     internal private(set) var cursor: Int
-    
+
     // minimum 1 value
     internal private(set) var versions: [Type] = []
-    
+
     internal var wrappedValue: Type {
         set {
-            versions.append(newValue)
-            cursor += 1
+            insert(newValue: newValue)
         } get {
             versions[cursor]
         }
     }
-    
-    internal init(wrappedValue: Type) {
+
+    internal init(wrappedValue: Type, maxSize: Int = 50) {
+        self.maxSize = maxSize
         cursor = 0
         versions.append(wrappedValue)
     }
-    
+
+    private mutating func insert(newValue: Type) {
+        versions.append(newValue)
+        cursor += 1
+
+        // if over max size, remove the oldest
+        if versions.count > maxSize {
+            versions.removeFirst()
+            cursor -= 1
+        }
+    }
+
     internal mutating func revert() {
         guard versions.endIndex > 1 else { return }
-        
+
         versions.removeLast()
         cursor -= 1
     }
-    
+
     internal mutating func checkout(_ cursor: Int) {
         guard versions.startIndex < cursor, cursor < versions.endIndex else { return }
-        
+
         self.cursor = cursor
     }
-    
+
     /**
      Remove all history, and left 1 last element
      */
     internal mutating func flush() {
         guard versions.endIndex > 1 else { return }
-        
+
         // only 2 items
         guard versions.endIndex != 1 else {
             versions.remove(at: 0)
             cursor = 0
             return
         }
-        
+
         // more than 2 items
-        let range = versions.startIndex...(versions.endIndex-2)
+        let range = versions.startIndex ... (versions.endIndex - 2)
         versions.removeSubrange(range)
         cursor = 0
     }
-    
+
     internal subscript(safe index: Int) -> Type? {
         versions[safe: index]
     }
-    
+
     internal func first() -> Type? {
         versions.first
     }
@@ -97,7 +110,7 @@ internal struct Traceable<Type> {
     internal func last() -> Type? {
         versions.last
     }
-    
+
     internal func last(where predicate: (Type) throws -> Bool) rethrows -> Type? {
         try versions.last(where: predicate)
     }
