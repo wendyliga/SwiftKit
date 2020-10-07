@@ -124,11 +124,11 @@ extension String {
      - prefix: text you want to remove
      - replaceWith: if you want to replace with spesific string
      
-     - Returns: String with remove prefix or nil if not found
+     - Returns: String with remove prefix
      */
-    public func withoutPrefix(_ prefix: String, replaceWith newString: String = "") -> String? {
+    public func withoutPrefix(_ prefix: String, replaceWith newString: String = "") -> String {
         guard hasPrefix(prefix) else {
-            return nil
+            return self
         }
         
         let endIndex = index(startIndex, offsetBy: prefix.count)
