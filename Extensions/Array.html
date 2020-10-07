@@ -1,0 +1,301 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <title>Array Extension Reference</title>
+    <link rel="stylesheet" type="text/css" href="../css/jazzy.css" />
+    <link rel="stylesheet" type="text/css" href="../css/highlight.css" />
+    <meta charset='utf-8'>
+    <script src="../js/jquery.min.js" defer></script>
+    <script src="../js/jazzy.js" defer></script>
+    
+  </head>
+  <body>
+    <a name="//apple_ref/swift/Extension/Array" class="dashAnchor"></a>
+    <a title="Array Extension Reference"></a>
+    <header>
+      <div class="content-wrapper">
+        <p><a href="../index.html">SwiftKit Docs</a> (84% documented)</p>
+        <p class="header-right"><a href="https://github.com/wendyliga/SwiftKit"><img src="../img/gh.png"/>View on GitHub</a></p>
+      </div>
+    </header>
+    <div class="content-wrapper">
+      <p id="breadcrumbs">
+        <a href="../index.html">SwiftKit Reference</a>
+        <img id="carat" src="../img/carat.png" />
+        Array Extension Reference
+      </p>
+    </div>
+    <div class="content-wrapper">
+      <nav class="sidebar">
+        <ul class="nav-groups">
+          <li class="nav-group-name">
+            <a href="../Enums.html">Enumerations</a>
+            <ul class="nav-group-tasks">
+              <li class="nav-group-task">
+                <a href="../Enums/GeneralError.html">GeneralError</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Enums/NoWhiteSpaceReplacer.html">NoWhiteSpaceReplacer</a>
+              </li>
+            </ul>
+          </li>
+          <li class="nav-group-name">
+            <a href="../Extensions.html">Extensions</a>
+            <ul class="nav-group-tasks">
+              <li class="nav-group-task">
+                <a href="../Extensions/Array.html">Array</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Extensions/Result.html">Result</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Extensions/String.html">String</a>
+              </li>
+            </ul>
+          </li>
+        </ul>
+      </nav>
+      <article class="main-content">
+        <section>
+          <section class="section">
+            <h1>Array</h1>
+              <div class="declaration">
+                <div class="language">
+                  <pre class="highlight swift"><code><span class="kd">extension</span> <span class="kt">Array</span></code></pre>
+<pre class="highlight swift"><code><span class="kd">extension</span> <span class="kt">Array</span> <span class="k">where</span> <span class="kt">Element</span> <span class="o">==</span> <span class="kt">String</span></code></pre>
+
+                </div>
+              </div>
+            <p>SwiftKit</p>
+
+<p>Copyright &copy; 2020 Wendy Liga. Licensed under the MIT license, as follows:</p>
+
+<p>Permission is hereby granted, free of charge, to any person obtaining a copy
+of this software and associated documentation files (the &ldquo;Software&rdquo;), to deal
+in the Software without restriction, including without limitation the rights
+to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+copies of the Software, and to permit persons to whom the Software is
+furnished to do so, subject to the following conditions:</p>
+
+<p>The above copyright notice and this permission notice shall be included in all
+copies or substantial portions of the Software.</p>
+
+<p>THE SOFTWARE IS PROVIDED &ldquo;AS IS&rdquo;, WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+SOFTWARE.</p>
+
+          </section>
+          <section class="section task-group-section">
+            <div class="task-group">
+              <ul>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:Sa8SwiftKitE4safexSgSi_tcip"></a>
+                    <a name="//apple_ref/swift/Method/subscript(safe:)" class="dashAnchor"></a>
+                    <a class="token" href="#/s:Sa8SwiftKitE4safexSgSi_tcip">subscript(safe:)</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Access Array item safely, get rid of out of range fatal error</p>
+<h2 id='how-to-use' class='heading'>How to Use:</h2>
+<pre class="highlight swift"><code><span class="k">let</span> <span class="nv">array</span> <span class="o">=</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">3</span><span class="p">,</span><span class="mi">4</span><span class="p">,</span><span class="mi">5</span><span class="p">,</span><span class="mi">6</span><span class="p">,</span><span class="mi">7</span><span class="p">,</span><span class="mi">8</span><span class="p">,</span><span class="mi">9</span><span class="p">]</span>
+
+<span class="nf">print</span><span class="p">(</span><span class="n">array</span><span class="p">[</span><span class="nv">safe</span><span class="p">:</span> <span class="mi">3</span><span class="p">])</span> <span class="o">-&gt;</span> <span class="n">result</span> <span class="mi">4</span>
+<span class="nf">print</span><span class="p">(</span><span class="n">array</span><span class="p">[</span><span class="nv">safe</span><span class="p">:</span> <span class="mi">100</span><span class="p">])</span> <span class="o">-&gt;</span> <span class="n">result</span> <span class="kc">nil</span>
+</code></pre>
+<h2 id='testing' class='heading'>Testing:</h2>
+
+<p>I do several test on this function, you can check it here <a href="https://gist.github.com/wendyliga/7e9d97eea01dcabf3d65664a294f40a0">https://gist.github.com/wendyliga/7e9d97eea01dcabf3d65664a294f40a0</a></p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="nf">subscript</span><span class="p">(</span><span class="n">safe</span> <span class="nv">index</span><span class="p">:</span> <span class="kt">Int</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">Element</span><span class="p">?</span> <span class="p">{</span> <span class="k">get</span> <span class="p">}</span></code></pre>
+
+                        </div>
+                      </div>
+                      <div>
+                        <h4>Parameters</h4>
+                        <table class="graybox">
+                          <tbody>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>index</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>Array index you want to access</p>
+                                </div>
+                              </td>
+                            </tr>
+                          </tbody>
+                        </table>
+                      </div>
+                      <div class="slightly-smaller">
+                        <a href="https://github.com/wendyliga/SwiftKit/tree/master/Sources/SwiftKit/Array+Extension.swift#L43-L49">Show on GitHub</a>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:Sa8SwiftKitE5afterxSgSi_tcip"></a>
+                    <a name="//apple_ref/swift/Method/subscript(after:)" class="dashAnchor"></a>
+                    <a class="token" href="#/s:Sa8SwiftKitE5afterxSgSi_tcip">subscript(after:)</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Access array item at after index safely</p>
+<h2 id='how-to-use' class='heading'>How to Use:</h2>
+<pre class="highlight swift"><code><span class="k">let</span> <span class="nv">array</span> <span class="o">=</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">3</span><span class="p">,</span><span class="mi">4</span><span class="p">,</span><span class="mi">5</span><span class="p">,</span><span class="mi">6</span><span class="p">,</span><span class="mi">7</span><span class="p">,</span><span class="mi">8</span><span class="p">,</span><span class="mi">9</span><span class="p">]</span>
+
+<span class="nf">print</span><span class="p">(</span><span class="n">array</span><span class="p">[</span><span class="nv">after</span><span class="p">:</span> <span class="mi">3</span><span class="p">])</span> <span class="o">-&gt;</span> <span class="n">result</span> <span class="mi">5</span>
+<span class="nf">print</span><span class="p">(</span><span class="n">array</span><span class="p">[</span><span class="nv">after</span><span class="p">:</span> <span class="mi">100</span><span class="p">])</span> <span class="o">-&gt;</span> <span class="n">result</span> <span class="kc">nil</span>
+</code></pre>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="nf">subscript</span><span class="p">(</span><span class="n">after</span> <span class="nv">index</span><span class="p">:</span> <span class="kt">Int</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">Element</span><span class="p">?</span> <span class="p">{</span> <span class="k">get</span> <span class="p">}</span></code></pre>
+
+                        </div>
+                      </div>
+                      <div>
+                        <h4>Parameters</h4>
+                        <table class="graybox">
+                          <tbody>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>after</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>array index after that you want to access</p>
+                                </div>
+                              </td>
+                            </tr>
+                          </tbody>
+                        </table>
+                      </div>
+                      <div class="slightly-smaller">
+                        <a href="https://github.com/wendyliga/SwiftKit/tree/master/Sources/SwiftKit/Array+Extension.swift#L64-L70">Show on GitHub</a>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:Sa8SwiftKitE10isNotEmptySbvp"></a>
+                    <a name="//apple_ref/swift/Property/isNotEmpty" class="dashAnchor"></a>
+                    <a class="token" href="#/s:Sa8SwiftKitE10isNotEmptySbvp">isNotEmpty</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Array that&rsquo;s not empty will be true</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="k">var</span> <span class="nv">isNotEmpty</span><span class="p">:</span> <span class="kt">Bool</span> <span class="p">{</span> <span class="k">get</span> <span class="p">}</span></code></pre>
+
+                        </div>
+                      </div>
+                      <div class="slightly-smaller">
+                        <a href="https://github.com/wendyliga/SwiftKit/tree/master/Sources/SwiftKit/Array+Extension.swift#L75-L77">Show on GitHub</a>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+              </ul>
+            </div>
+            <div class="task-group">
+              <div class="task-name-container">
+                <a name="/Available%20where%20%60Element%60%20==%20%60String%60"></a>
+                <a name="//apple_ref/swift/Section/Available where `Element` == `String`" class="dashAnchor"></a>
+                <div class="section-name-container">
+                  <a class="section-name-link" href="#/Available%20where%20%60Element%60%20==%20%60String%60"></a>
+                  <h3 class="section-name"><p>Available where <code>Element</code> == <code>String</code></p>
+</h3>
+                </div>
+              </div>
+              <ul>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:Sa8SwiftKitSSRszlE11stringValueSSyF"></a>
+                    <a name="//apple_ref/swift/Method/stringValue()" class="dashAnchor"></a>
+                    <a class="token" href="#/s:Sa8SwiftKitSSRszlE11stringValueSSyF">stringValue()</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Get String value from array of String</p>
+
+<p>Example:</p>
+<pre class="highlight swift"><code><span class="k">let</span> <span class="nv">array</span> <span class="o">=</span> <span class="p">[</span><span class="s">"Apple"</span><span class="p">,</span> <span class="s">"Banana"</span><span class="p">,</span> <span class="s">"Orange"</span><span class="p">]</span>
+
+<span class="n">array</span><span class="o">.</span><span class="nf">getFormattedValue</span><span class="p">()</span> <span class="o">-&gt;</span> <span class="kt">Apple</span><span class="p">,</span> <span class="kt">Banana</span><span class="p">,</span> <span class="kt">Orange</span>
+</code></pre>
+
+<p>Returns: String value with comma separated</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">func</span> <span class="nf">stringValue</span><span class="p">()</span> <span class="o">-&gt;</span> <span class="kt">String</span></code></pre>
+
+                        </div>
+                      </div>
+                      <div class="slightly-smaller">
+                        <a href="https://github.com/wendyliga/SwiftKit/tree/master/Sources/SwiftKit/String+Extension.swift#L215-L229">Show on GitHub</a>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+              </ul>
+            </div>
+          </section>
+        </section>
+        <section id="footer">
+          <p>© 2019 <a class="link" href="https://github.com/wendyliga" target="_blank" rel="external">Wendy Liga</a> under <a class="link" href="https://github.com/wendyliga/SwiftKit/blob/master/LICENSE" target="_blank" rel="external">open source license</a>.</p>
+          <p>Generated by <a class="link" href="https://github.com/realm/jazzy" target="_blank" rel="external">jazzy ♪♫ v0.13.1</a>, a <a class="link" href="https://realm.io" target="_blank" rel="external">Realm</a> project.</p>
+        </section>
+      </article>
+    </div>
+  </body>
+</div>
+</html>
