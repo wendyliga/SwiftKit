@@ -25,53 +25,63 @@
 import Foundation
 
 /**
- `NonEmpty` as `PropertyWrapper`
+ Property wrapper to set default value if spesific condition is fulfilled
  
  example
  ```swift
- internal struct User {
-     @NonEmpty
-     var email: String?
-     
-     internal init(email: String?) {
-         self.email = email
-     }
+ struct User {
+     @DefaultValue(if: { $0.isEmpty }, then: "admin", initialValue: "")
+     var password: String
  }
  ```
  
- if value email is string empty, then it will automatically set to `nil`
+ if everytime password is set, and empty, then we use "admin" as default value
  */
 @propertyWrapper
-public struct NonEmpty {
-    private var _wrappedValue: String?
-    public var wrappedValue: String? {
+public struct DefaultValue<T> {
+    public typealias Condition = (T) -> Bool
+    public let condition: Condition
+    public let defaultValue: T
+    var _wrappedValue: T
+    public var wrappedValue: T {
         get {
             _wrappedValue
         }
         set {
-            _wrappedValue = newValue?.nonEmpty
+            _wrappedValue = Self.validate(condition: condition, then: defaultValue, else: newValue)
         }
     }
     
-    public init(_ wrappedValue: String?) {
-        _wrappedValue = wrappedValue?.nonEmpty
+    public init(if condition: @escaping Condition, then defaultValue: T, initialValue: T) {
+        self.condition = condition
+        self.defaultValue = defaultValue
+        self._wrappedValue = Self.validate(condition: condition, then: defaultValue, else: initialValue)
+    }
+    
+    public static func validate(
+        condition: @escaping Condition,
+        then defaultValue: @autoclosure () throws -> T,
+        else newValue: @autoclosure () throws -> T
+    ) rethrows -> T {
+        let newValue = try newValue()
+        
+        if condition(newValue) {
+            return try defaultValue()
+        } else {
+            return newValue
+        }
     }
 }
 
-extension NonEmpty: Equatable {
-    public static func == (lhs: NonEmpty, rhs: NonEmpty) -> Bool {
+extension DefaultValue: Equatable where T: Equatable {
+    public static func == (lhs: DefaultValue<T>, rhs: DefaultValue<T>) -> Bool {
         lhs._wrappedValue == rhs._wrappedValue
     }
 }
 
-extension NonEmpty: Hashable {
+extension DefaultValue: Hashable where T: Hashable {
     public func hash(into hasher: inout Hasher) {
         hasher.combine(_wrappedValue)
     }
 }
 
-extension NonEmpty: ExpressibleByStringLiteral {
-    public init(stringLiteral value: String) {
-        self.init(value)
-    }
-}
