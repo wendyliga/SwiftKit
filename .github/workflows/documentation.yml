@@ -21,7 +21,7 @@ jobs:
       - name: Generate Documentation
         uses: SwiftDocOrg/swift-doc@master
         with:
-          base-url: /
+          base-url: /SwiftKit
           format: html
           inputs: Sources/SwiftKit
           module-name: SwiftKit
