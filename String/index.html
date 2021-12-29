@@ -1,0 +1,334 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SwiftKit - String</title>
+    <link rel="stylesheet" type="text/css" href="/all.css" media="all" />
+</head>
+<body>
+    <header>
+        <a href="/">
+            <strong>
+                SwiftKit
+            </strong>
+            <span>Documentation</span>
+        </a>
+    </header>
+
+    <!--
+    <form class="search">
+        <input type="search" placeholder="Search" />
+    </form>
+    -->
+
+    <nav>
+        <div class="wrapper">
+            <h2>On This Page</h2>
+            <ol><li><a href="#properties">Properties</a><ul><li class="variable"><a href="#string.isnotempty">is​Not​Empty</a></li><li class="variable"><a href="#string.nonempty">non​Empty</a></li></ul></li><li><a href="#methods">Methods</a><ul><li class="function"><a href="#string.withprefixidentation(count:)">with​Prefix​Identation(count:​)</a></li><li class="function"><a href="#string.separate(with:offset:)">separate(with:​offset:​)</a></li><li class="function"><a href="#string.withoutprefix(_:replacewith:)">without​Prefix(_:​replace​With:​)</a></li><li class="function"><a href="#string.withoutsuffix(_:replacewith:)">without​Suffix(_:​replace​With:​)</a></li><li class="function"><a href="#string.nowhitespace(replace:)">no​White​Space(replace:​)</a></li><li class="function"><a href="#string.capitalizefirstletter()">capitalize​First​Letter()</a></li></ul></li></ol>
+        </div>
+    </nav>
+
+    <main>
+        <article>
+            <h1>
+    <small>Extensions on</small>
+    <code class="name">String</code>
+</h1>
+    <section id="properties">
+        <h2>Properties</h2>
+
+        <div role="article" class="variable" id="string.isnotempty">
+    <h3>
+        <code><a href="#string.isnotempty">is​Not​Empty</a></code>
+    </h3>
+    <div class="declaration">
+<pre class="highlight"><code><html><body><span class="keyword">public</span> <span class="keyword">var</span> <span class="variable">isNotEmpty</span>: <span class="type">Bool</span>  </body></html></code></pre>
+</div>
+<div class="summary" role="doc-abstract">
+    <p>String that's not empty will be true</p>
+
+</div>
+</div>
+<div role="article" class="variable" id="string.nonempty">
+    <h3>
+        <code><a href="#string.nonempty">non​Empty</a></code>
+    </h3>
+    <div class="declaration">
+<pre class="highlight"><code><html><body><span class="keyword">public</span> <span class="keyword">var</span> <span class="variable">nonEmpty</span>: <span class="type">String</span>?  </body></html></code></pre>
+</div>
+<div class="summary" role="doc-abstract">
+    <p>Return nil if string is empty</p>
+
+</div>
+</div>
+    </section>
+    <section id="methods">
+        <h2>Methods</h2>
+
+        <div role="article" class="function" id="string.withprefixidentation(count:)">
+    <h3>
+        <code><a href="#string.withprefixidentation(count:)">with​Prefix​Identation(count:​)</a></code>
+    </h3>
+    <div class="declaration">
+<pre class="highlight"><code><html><body><span class="keyword">public</span> <span class="keyword">func</span> <span class="function">withPrefixIdentation</span>(<span class="variable">count</span>: <span class="type">Int</span> = <span class="number literal">1</span>) -&gt; <span class="type">String</span>  </body></html></code></pre>
+</div>
+<div class="summary" role="doc-abstract">
+    <p>Add identation in front of string</p>
+
+</div>
+<div class="discussion">
+    <p>Example</p>
+
+<html><body><pre class="highlight"><code><span class="keyword">let</span> <span class="variable">name</span> = <span class="string literal">"</span><span class="string literal">Wendy Liga</span><span class="string literal">"</span>
+<span class="keyword">let</span> <span class="variable">nameWithIdentation</span> = <span class="string literal">"</span><span class="string literal">Wendy Liga</span><span class="string literal">"</span>.<span class="variable">withPrefixIdentation</span>()
+     
+<span class="variable">print</span>(<span class="variable">nameWithIdentation</span>) -&gt; <span class="string literal">"</span><span class="string literal">    Wendy Liga</span><span class="string literal">"</span>
+</code></pre></body></html>
+</div>
+<h4>Parameters</h4>
+
+<table class="parameters">
+  <thead hidden>
+  <tr>
+      <th>Name</th>
+      <th>Type</th>
+      <th>Description</th>
+  </tr>
+  </thead>
+  <tbody>
+    <tr>
+    <th>count</th>
+    <td><code class="type">Int</code></td>
+    <td><p>number of identation</p>
+</td>
+</tr>
+<tr>
+    <th>Returns</th>
+    <td></td>
+    <td><p>String with prefix Identation</p>
+</td>
+</tr>
+  </tbody>
+</table>
+</div>
+<div role="article" class="function" id="string.separate(with:offset:)">
+    <h3>
+        <code><a href="#string.separate(with:offset:)">separate(with:​offset:​)</a></code>
+    </h3>
+    <div class="declaration">
+<pre class="highlight"><code><html><body><span class="keyword">public</span> <span class="keyword">func</span> <span class="function">separate</span>(<span class="variable">with</span> <span class="variable">rightSide</span>: <span class="type">String</span>, <span class="variable">offset</span>: <span class="type">Int</span>) -&gt; <span class="type">String</span>  </body></html></code></pre>
+</div>
+<div class="summary" role="doc-abstract">
+    <p>Separate two text with spesific offset</p>
+
+</div>
+<div class="discussion">
+    <p>This function will create table like string</p>
+
+<p>Example:</p>
+
+<html><body><pre class="highlight"><code><span class="variable">String</span>         <span class="variable">an</span> <span class="variable">collection</span> <span class="variable">of</span> <span class="variable">characters</span>
+<span class="variable">Int</span>            <span class="variable">containing</span> <span class="variable">number</span>
+<span class="variable">Double</span>         <span class="variable">bigger</span> <span class="variable">than</span> <span class="variable">Int</span>
+</code></pre></body></html>
+</div>
+<h4>Parameters</h4>
+
+<table class="parameters">
+  <thead hidden>
+  <tr>
+      <th>Name</th>
+      <th>Type</th>
+      <th>Description</th>
+  </tr>
+  </thead>
+  <tbody>
+    <tr>
+    <th>with</th>
+    <td><code class="type">String</code></td>
+    <td><p>right side text</p>
+</td>
+</tr>
+<tr>
+    <th>offset</th>
+    <td><code class="type">Int</code></td>
+    <td><p>how many offset from left side</p>
+</td>
+</tr>
+<tr>
+    <th>Returns</th>
+    <td></td>
+    <td><p>String with separation, look Example for mode detail</p>
+</td>
+</tr>
+  </tbody>
+</table>
+</div>
+<div role="article" class="function" id="string.withoutprefix(_:replacewith:)">
+    <h3>
+        <code><a href="#string.withoutprefix(_:replacewith:)">without​Prefix(_:​replace​With:​)</a></code>
+    </h3>
+    <div class="declaration">
+<pre class="highlight"><code><html><body><span class="keyword">public</span> <span class="keyword">func</span> <span class="function">withoutPrefix</span>(<span class="keyword">_</span> <span class="variable">prefix</span>: <span class="type">String</span>, <span class="variable">replaceWith</span> <span class="variable">newString</span>: <span class="type">String</span> = <span class="string literal">"</span><span class="string literal"/><span class="string literal">"</span>) -&gt; <span class="type">String</span>  </body></html></code></pre>
+</div>
+<div class="summary" role="doc-abstract">
+    <p>remove prefix on string</p>
+
+</div>
+<div class="discussion">
+    <p>Example:</p>
+
+<html><body><pre class="highlight"><code><span class="keyword">let</span> <span class="variable">string</span> = <span class="string literal">"</span><span class="string literal">$10.000</span><span class="string literal">"</span>
+<span class="keyword">let</span> <span class="variable">stringWithoutPrefix</span> = <span class="variable">string</span>.<span class="variable">withoutPrefix</span>(<span class="string literal">"</span><span class="string literal">$</span><span class="string literal">"</span>) -&gt; <span class="string literal">"</span><span class="string literal">10.000</span><span class="string literal">"</span>
+     
+<span class="variable">or</span>
+     
+<span class="keyword">let</span> <span class="variable">string</span> = <span class="string literal">"</span><span class="string literal">~/document</span><span class="string literal">"</span>
+<span class="keyword">let</span> <span class="variable">stringWithoutPrefix</span> = <span class="variable">string</span>.<span class="variable">withoutPrefix</span>(<span class="string literal">"</span><span class="string literal">.</span><span class="string literal">"</span>) -&gt; <span class="string literal">"</span><span class="string literal">~/document</span><span class="string literal">"</span>
+</code></pre></body></html>
+</div>
+<h4>Parameters</h4>
+
+<table class="parameters">
+  <thead hidden>
+  <tr>
+      <th>Name</th>
+      <th>Type</th>
+      <th>Description</th>
+  </tr>
+  </thead>
+  <tbody>
+    <tr>
+    <th>prefix</th>
+    <td><code class="type">String</code></td>
+    <td><p>text you want to remove</p>
+</td>
+</tr>
+<tr>
+    <th>replace​With</th>
+    <td><code class="type">String</code></td>
+    <td><p>if you want to replace with spesific string</p>
+</td>
+</tr>
+<tr>
+    <th>Returns</th>
+    <td></td>
+    <td><p>String with remove prefix</p>
+</td>
+</tr>
+  </tbody>
+</table>
+</div>
+<div role="article" class="function" id="string.withoutsuffix(_:replacewith:)">
+    <h3>
+        <code><a href="#string.withoutsuffix(_:replacewith:)">without​Suffix(_:​replace​With:​)</a></code>
+    </h3>
+    <div class="declaration">
+<pre class="highlight"><code><html><body><span class="keyword">public</span> <span class="keyword">func</span> <span class="function">withoutSuffix</span>(<span class="keyword">_</span> <span class="variable">suffix</span>: <span class="type">String</span>, <span class="variable">replaceWith</span> <span class="variable">newString</span>: <span class="type">String</span> = <span class="string literal">"</span><span class="string literal"/><span class="string literal">"</span>) -&gt; <span class="type">String</span>  </body></html></code></pre>
+</div>
+<div class="summary" role="doc-abstract">
+    <p>remove suffix on string</p>
+
+</div>
+<div class="discussion">
+    <p>Example:</p>
+
+<html><body><pre class="highlight"><code><span class="keyword">let</span> <span class="variable">string</span> = <span class="string literal">"</span><span class="string literal">10.000.</span><span class="string literal">"</span>
+<span class="keyword">let</span> <span class="variable">stringWithoutPrefix</span> = <span class="variable">string</span>.<span class="variable">withoutPrefix</span>(<span class="string literal">"</span><span class="string literal">.</span><span class="string literal">"</span>) -&gt; <span class="string literal">"</span><span class="string literal">10.000</span><span class="string literal">"</span>
+     
+<span class="variable">or</span>
+     
+<span class="keyword">let</span> <span class="variable">string</span> = <span class="string literal">"</span><span class="string literal">~/document</span><span class="string literal">"</span>
+<span class="keyword">let</span> <span class="variable">stringWithoutPrefix</span> = <span class="variable">string</span>.<span class="variable">withoutPrefix</span>(<span class="string literal">"</span><span class="string literal">.</span><span class="string literal">"</span>) -&gt; <span class="string literal">"</span><span class="string literal">~/document</span><span class="string literal">"</span>
+</code></pre></body></html>
+</div>
+<h4>Parameters</h4>
+
+<table class="parameters">
+  <thead hidden>
+  <tr>
+      <th>Name</th>
+      <th>Type</th>
+      <th>Description</th>
+  </tr>
+  </thead>
+  <tbody>
+    <tr>
+    <th>suffix</th>
+    <td><code class="type">String</code></td>
+    <td><p>text you want to remove</p>
+</td>
+</tr>
+<tr>
+    <th>replace​With</th>
+    <td><code class="type">String</code></td>
+    <td><p>if you want to replace with spesific string</p>
+</td>
+</tr>
+<tr>
+    <th>Returns</th>
+    <td></td>
+    <td><p>String with remove suffix</p>
+</td>
+</tr>
+  </tbody>
+</table>
+</div>
+<div role="article" class="function" id="string.nowhitespace(replace:)">
+    <h3>
+        <code><a href="#string.nowhitespace(replace:)">no​White​Space(replace:​)</a></code>
+    </h3>
+    <div class="declaration">
+<pre class="highlight"><code><html><body><span class="keyword">public</span> <span class="keyword">func</span> <span class="function">noWhiteSpace</span>(<span class="variable">replace</span> <span class="variable">with</span>: <a href="/NoWhiteSpaceReplacer"><span class="type">NoWhiteSpaceReplacer</span></a>) -&gt; <span class="type">String</span>  </body></html></code></pre>
+</div>
+<div class="summary" role="doc-abstract">
+    <p>remote white space inside <code>String</code></p>
+
+</div>
+<div class="discussion">
+    <p>with several mode</p>
+
+<ul>
+<li>
+<p>none : will vanish all white space like &quot;This is Amazing&quot; into &quot;ThisIsAmazing&quot;</p>
+</li>
+<li>
+<p>camelCase: remove whitespace and make sure every first character of words seperated with white space will be capitalized like &quot;my name is wendy&quot; into &quot;MyNameIsWendy&quot;</p>
+</li>
+<li>
+<p>snakeCase: replace whitespace with _ like &quot;hello world&quot; into &quot;hello_world&quot;</p>
+</li>
+</ul>
+
+</div>
+</div>
+<div role="article" class="function" id="string.capitalizefirstletter()">
+    <h3>
+        <code><a href="#string.capitalizefirstletter()">capitalize​First​Letter()</a></code>
+    </h3>
+    <div class="declaration">
+<pre class="highlight"><code><html><body><span class="keyword">public</span> <span class="keyword">func</span> <span class="function">capitalizeFirstLetter</span>() -&gt; <span class="type">String</span>  </body></html></code></pre>
+</div>
+<div class="summary" role="doc-abstract">
+    <p>Capitalize first letter</p>
+
+</div>
+<div class="discussion">
+    <p>Example:
+string -&gt; String
+wendy -&gt; Wendy</p>
+
+</div>
+</div>
+    </section>
+        </article>
+    </main>
+
+    <footer>
+        <p>
+    Generated on <time datetime="2021-12-29T07:51:19+0000">December 29, 2021</time> using <a href="https://github.com/SwiftDocOrg/swift-doc">swift-doc</a> <span class="version">1.0.0-rc.1</span>.
+</p>
+    </footer>
+</body>
+</html>
