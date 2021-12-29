@@ -1,9 +1,12 @@
 # SwiftKit
 
 <p align="left">
-    <a href="https://travis-ci.org/wendyliga/SwiftKit">
-        <img src="https://travis-ci.org/wendyliga/SwiftKit.svg?branch=master" alt="Swift Kit Travis CI" />
-    </a> 
+    <a href="https://github.com/wendyliga/SwiftKit/actions/workflows/ci.yml">
+        <img src="https://github.com/wendyliga/SwiftKit/actions/workflows/ci.yml/badge.svg"/>
+    </a>
+    <a href="https://codecov.io/gh/wendyliga/SwiftKit">
+        <img src="https://codecov.io/gh/wendyliga/SwiftKit/branch/main/graph/badge.svg?token=0OLMG26N48"/>
+    </a>
     <a href="https://swift.org/package-manager">
         <img src="https://img.shields.io/badge/spm-compatible-brightgreen.svg?style=flat" alt="Swift Package Manager" />
     </a>
@@ -12,6 +15,7 @@
     </a>
 </p>
 
+[![](https://img.shields.io/endpoint?url=https%3A%2F%2Fswiftpackageindex.com%2Fapi%2Fpackages%2Fwendyliga%2FSwiftKit%2Fbadge%3Ftype%3Dswift-versions)](https://swiftpackageindex.com/wendyliga/SwiftKit) [![](https://img.shields.io/endpoint?url=https%3A%2F%2Fswiftpackageindex.com%2Fapi%2Fpackages%2Fwendyliga%2FSwiftKit%2Fbadge%3Ftype%3Dplatforms)](https://swiftpackageindex.com/wendyliga/SwiftKit)
 
 Collection of Swift Helper and Utilities
 
