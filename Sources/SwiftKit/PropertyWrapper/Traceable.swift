@@ -61,6 +61,11 @@ public struct Traceable<Type> {
         versions.append(wrappedValue)
     }
 
+    /**
+     Insert new history to stack
+     
+     - Parameter newValue: new history
+     */
     private mutating func insert(newValue: Type) {
         versions.append(newValue)
         cursor += 1
@@ -72,6 +77,9 @@ public struct Traceable<Type> {
         }
     }
 
+    /**
+     Remove last history
+     */
     public mutating func revert() {
         guard versions.endIndex > 1 else { return }
 
@@ -79,6 +87,11 @@ public struct Traceable<Type> {
         cursor -= 1
     }
 
+    /**
+     Move cursor to spesific index
+     
+     - Parameter cursor: index of history
+     */
     public mutating func checkout(_ cursor: Int) {
         guard versions.startIndex < cursor, cursor < versions.endIndex else { return }
 
@@ -104,26 +117,57 @@ public struct Traceable<Type> {
         cursor = 0
     }
 
+    /**
+     Safely access history, if index is out of bounds, will return nil
+     
+     - Parameter safe: index of history
+     - Returns: history based on index
+     */
     public subscript(safe index: Int) -> Type? {
         versions[safe: index]
     }
 
+    /**
+     Get first history
+     - Returns: First history
+     */
     public func first() -> Type? {
         versions.first
     }
 
+    /**
+     Get first item that meet condition
+     
+     - Parameter predicate: Condition, if true, will return spesific history
+     - Returns: History that meet given condition
+     */
     public func first(where predicate: (Type) throws -> Bool) rethrows -> Type? {
         try versions.first(where: predicate)
     }
-
+    
+    /**
+     Get last history
+     - Returns: Last history
+     */
     public func last() -> Type? {
         versions.last
     }
 
+    /**
+     Get last item that meet condition
+     
+     - Parameter predicate: Condition, if true, will return spesific history
+     - Returns: History that meet given condition
+     */
     public func last(where predicate: (Type) throws -> Bool) rethrows -> Type? {
         try versions.last(where: predicate)
     }
     
+    /**
+     Get all version
+     
+     - Returns: All version on current value
+     */
     public func all() -> [Type] {
         versions
     }
