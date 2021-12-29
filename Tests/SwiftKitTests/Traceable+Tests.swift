@@ -29,6 +29,11 @@ final class TraceableTests: XCTestCase {
     static var allTests = [
         ("test_traceable_revert", test_traceable_revert),
         ("test_traceable_checkout", test_traceable_checkout),
+        ("test_traceable_flush", test_traceable_flush),
+        ("test_traceable_subscript_inbounds", test_traceable_subscript_inbounds),
+        ("test_traceable_subscript_out_of_bounds", test_traceable_subscript_out_of_bounds),
+        ("test_traceable_first_and_last", test_traceable_first_and_last),
+        ("test_traceable_first_and_last_with_condition", test_traceable_first_and_last_with_condition),
     ]
   
     struct User {

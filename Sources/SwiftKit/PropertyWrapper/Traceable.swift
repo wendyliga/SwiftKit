@@ -26,8 +26,17 @@ import Foundation
 
 /**
  Add ability to type to have traceable history.
- 
  property with this propertyWrapper will automatically have version. if propery is set, the set value will enter history.
+ 
+ example
+ ```swift
+ struct User {
+     @Traceable
+     var name: String
+ }
+ ```
+ 
+ to see more, check `Traceable+Tests.swift`
  */
 @propertyWrapper
 public struct Traceable<Type> {
