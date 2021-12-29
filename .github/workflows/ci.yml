@@ -13,11 +13,12 @@ jobs:
     strategy:
       matrix:
         xcode:
-          - '11.3.1'
+          # - '11.3.1'
           - '12.5.1'
           - '13.0'
     runs-on: macos-latest
     steps:
+      - run: ls -n /Applications/ | grep Xcode*
       - uses: actions/checkout@v2
       - name: Select Xcode ${{ matrix.xcode }}
         run: sudo xcode-select -s /Applications/Xcode_${{ matrix.xcode }}.app
