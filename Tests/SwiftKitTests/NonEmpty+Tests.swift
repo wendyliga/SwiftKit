@@ -25,35 +25,35 @@
 import XCTest
 @testable import SwiftKit
 
-internal final class NonEmptyTests: XCTestCase {
-    internal static var allTests = [
+final class NonEmptyTests: XCTestCase {
+    static var allTests = [
         ("test_non_empty_fulfilled", test_non_empty_fulfilled),
         ("test_non_empty_not_fulfilled", test_non_empty_not_fulfilled),
         ("test_non_empty_equatable", test_non_empty_equatable),
         ("test_non_empty_hashable", test_non_empty_hashable)
     ]
   
-    internal struct User {
+    struct User {
         @NonEmpty
         var email: String?
     }
     
-    internal func test_non_empty_fulfilled() {
+    func test_non_empty_fulfilled() {
         let user = User(email: "")
         XCTAssertEqual(user.email, nil)
     }
     
-    internal func test_non_empty_not_fulfilled() {
+    func test_non_empty_not_fulfilled() {
         let user = User(email: "user@email.com")
         XCTAssertEqual(user.email, "user@email.com")
     }
     
-    internal func test_non_empty_equatable() {
+    func test_non_empty_equatable() {
         let user = User(email: "user@email.com")
         XCTAssertEqual(user.email, "user@email.com")
     }
     
-    internal func test_non_empty_hashable() {
+    func test_non_empty_hashable() {
         let rawString: String? = "hello_world"
         let user = User(email: "hello_world")
         

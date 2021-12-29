@@ -29,11 +29,11 @@ import Foundation
  
  example
  ```swift
- internal struct User {
+ struct User {
      @NonEmpty
      var email: String?
      
-     internal init(email: String?) {
+     init(email: String?) {
          self.email = email
      }
  }

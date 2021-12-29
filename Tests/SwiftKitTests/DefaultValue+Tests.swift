@@ -25,39 +25,39 @@
 import XCTest
 @testable import SwiftKit
 
-internal final class DefaultValueTests: XCTestCase {
-    internal static var allTests = [
+final class DefaultValueTests: XCTestCase {
+    static var allTests = [
         ("test_defaultValue_condition_fulfilled", test_defaultValue_condition_fulfilled),
         ("test_defaultValue_condition_not_fulfilled", test_defaultValue_condition_not_fulfilled),
         ("test_defaultValue_equatable", test_defaultValue_equatable),
         ("test_defaultValue_hashable", test_defaultValue_hashable)
     ]
   
-    internal struct User {
+    struct User {
         @DefaultValue(if: { $0.isEmpty }, then: "admin", initialValue: "")
         var password: String
         
-        internal init(password: String) {
+        init(password: String) {
             self.password = password
         }
     }
     
-    internal func test_defaultValue_condition_fulfilled() {
+    func test_defaultValue_condition_fulfilled() {
         let user = User(password: "")
         XCTAssertEqual(user.password, "admin")
     }
     
-    internal func test_defaultValue_condition_not_fulfilled() {
+    func test_defaultValue_condition_not_fulfilled() {
         let user = User(password: "password")
         XCTAssertEqual(user.password, "password")
     }
     
-    internal func test_defaultValue_equatable() {
+    func test_defaultValue_equatable() {
         let user = User(password: "hello_world")
         XCTAssertEqual(user.password, "hello_world")
     }
     
-    internal func test_defaultValue_hashable() {
+    func test_defaultValue_hashable() {
         let rawString = "hello_world"
         let user = User(password: "hello_world")
         
