@@ -36,6 +36,7 @@ jobs:
           token: ${{ secrets.CODECOV_TOKEN }}
           files: coverage.lcov
           verbose: true
+          flags: macos-11 xcode${{ matrix.xcode }}
           env_vars: MD_APPLE_SDK_ROOT,RUNNER_OS,RUNNER_ARCH
   windows:
     runs-on: windows-2019
@@ -79,4 +80,5 @@ jobs:
           token: ${{ secrets.CODECOV_TOKEN }}
           files: coverage.lcov
           verbose: true
+          flags: ubuntu-20.04 swift${{ matrix.swift }}
           env_vars: SWIFT_VERSION,SWIFT_PLATFORM,RUNNER_OS,RUNNER_ARCH
