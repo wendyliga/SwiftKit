@@ -1,4 +1,7 @@
-// import XCTest
-// import SwiftKitTests
+/**
+    for testing on windows
+*/
+import XCTest
+import SwiftKitTests
 
-// XCTMain(SwiftKitTests.allTests())
+XCTMain(SwiftKitTests.allTests())
