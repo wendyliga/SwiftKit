@@ -33,7 +33,10 @@ jobs:
         with:
           token: ${{ secrets.CODECOV_TOKEN }}
           directory: .build/derivedData
+          verbose: true
           env_vars: MD_APPLE_SDK_ROOT,RUNNER_OS,RUNNER_ARCH
+      - name: Upload
+        run: bash <(curl -s https://codecov.io/bash) -D .build/derivedData
   windows:
     runs-on: windows-2019
     strategy:
