@@ -26,35 +26,35 @@ import XCTest
 
 @testable import SwiftKit
 
-internal final class ResultTests: XCTestCase {
-    internal static var allTests = [
+final class ResultTests: XCTestCase {
+    static var allTests = [
         ("test_successValue_onSuccessResult", test_successValue_onSuccessResult),
         ("test_successValue_onFailureResult", test_successValue_onFailureResult),
         ("test_failureValue_onSuccessResult", test_failureValue_onSuccessResult),
         ("test_failureValue_onFailureResult", test_failureValue_onFailureResult),
     ]
     
-    internal func dummySuccessResult() -> Result<Int, GeneralError> {
+    func dummySuccessResult() -> Result<Int, GeneralError> {
         return .success(0)
     }
     
-    internal func dummyFailureResult() -> Result<Int, GeneralError> {
+    func dummyFailureResult() -> Result<Int, GeneralError> {
         return .failure(GeneralError.unidentifiedError)
     }
     
-    internal func test_successValue_onSuccessResult() {
+    func test_successValue_onSuccessResult() {
         XCTAssertEqual(dummySuccessResult().successValue, 0)
     }
     
-    internal func test_successValue_onFailureResult() {
+    func test_successValue_onFailureResult() {
         XCTAssertEqual(dummyFailureResult().successValue, nil)
     }
     
-    internal func test_failureValue_onSuccessResult() {
+    func test_failureValue_onSuccessResult() {
         XCTAssertEqual(dummySuccessResult().failureValue, nil)
     }
     
-    internal func test_failureValue_onFailureResult() {
+    func test_failureValue_onFailureResult() {
         XCTAssertEqual(dummyFailureResult().failureValue, GeneralError.unidentifiedError)
     }
 }

@@ -27,18 +27,18 @@ import Foundation
 /**
  Add ability to type to have traceable history.
  
- property with this propertyWrapper will aumatically have version. if propery is set, the set value will enter history.
+ property with this propertyWrapper will automatically have version. if propery is set, the set value will enter history.
  */
 @propertyWrapper
-internal struct Traceable<Type> {
+public struct Traceable<Type> {
     private let maxSize: Int
 
-    internal private(set) var cursor: Int
+    private(set) var cursor: Int
 
     // minimum 1 value
-    internal private(set) var versions: [Type] = []
+    private(set) var versions: [Type] = []
 
-    internal var wrappedValue: Type {
+    public var wrappedValue: Type {
         set {
             insert(newValue: newValue)
         } get {
@@ -46,7 +46,7 @@ internal struct Traceable<Type> {
         }
     }
 
-    internal init(wrappedValue: Type, maxSize: Int = 50) {
+    public init(wrappedValue: Type, maxSize: Int = 50) {
         self.maxSize = maxSize
         cursor = 0
         versions.append(wrappedValue)
@@ -63,14 +63,14 @@ internal struct Traceable<Type> {
         }
     }
 
-    internal mutating func revert() {
+    public mutating func revert() {
         guard versions.endIndex > 1 else { return }
 
         versions.removeLast()
         cursor -= 1
     }
 
-    internal mutating func checkout(_ cursor: Int) {
+    public mutating func checkout(_ cursor: Int) {
         guard versions.startIndex < cursor, cursor < versions.endIndex else { return }
 
         self.cursor = cursor
@@ -79,7 +79,7 @@ internal struct Traceable<Type> {
     /**
      Remove all history, and left 1 last element
      */
-    internal mutating func flush() {
+    public mutating func flush() {
         guard versions.endIndex > 1 else { return }
 
         // only 2 items
@@ -95,24 +95,28 @@ internal struct Traceable<Type> {
         cursor = 0
     }
 
-    internal subscript(safe index: Int) -> Type? {
+    public subscript(safe index: Int) -> Type? {
         versions[safe: index]
     }
 
-    internal func first() -> Type? {
+    public func first() -> Type? {
         versions.first
     }
 
-    internal func first(where predicate: (Type) throws -> Bool) rethrows -> Type? {
+    public func first(where predicate: (Type) throws -> Bool) rethrows -> Type? {
         try versions.first(where: predicate)
     }
 
-    internal func last() -> Type? {
+    public func last() -> Type? {
         versions.last
     }
 
-    internal func last(where predicate: (Type) throws -> Bool) rethrows -> Type? {
+    public func last(where predicate: (Type) throws -> Bool) rethrows -> Type? {
         try versions.last(where: predicate)
+    }
+    
+    public func all() -> [Type] {
+        versions
     }
 }
 

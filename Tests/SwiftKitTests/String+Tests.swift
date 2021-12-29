@@ -26,8 +26,8 @@ import XCTest
 
 @testable import SwiftKit
 
-internal final class StringTests: XCTestCase {
-    internal static var allTests = [
+final class StringTests: XCTestCase {
+    static var allTests = [
         ("test_withPrefixIdentation_withValidIdentation", test_withPrefixIdentation_withValidIdentation),
         ("test_withPrefixIdentation_withNonValidIdentation", test_withPrefixIdentation_withNonValidIdentation),
         ("test_nonEmpty_withNonEmptyString", test_nonEmpty_withNonEmptyString),
@@ -44,55 +44,55 @@ internal final class StringTests: XCTestCase {
         ("test_capitalizeFirstLetter", test_capitalizeFirstLetter)
     ]
     
-    internal func test_withPrefixIdentation_withValidIdentation() {
+    func test_withPrefixIdentation_withValidIdentation() {
         let string = "Hello World"
         
         XCTAssertEqual(string.withPrefixIdentation(count: 1), "    Hello World")
     }
     
-    internal func test_withPrefixIdentation_withNonValidIdentation() {
+    func test_withPrefixIdentation_withNonValidIdentation() {
         let string = "Hello World"
         
         XCTAssertEqual(string.withPrefixIdentation(count: -1), "Hello World")
     }
     
-    internal func test_nonEmpty_withNonEmptyString() {
+    func test_nonEmpty_withNonEmptyString() {
         let string = "Hello World"
         
         XCTAssertEqual(string.nonEmpty, "Hello World")
     }
     
-    internal func test_nonEmpty_withEmptyString() {
+    func test_nonEmpty_withEmptyString() {
         let string = ""
         
         XCTAssertEqual(string.nonEmpty, nil)
     }
     
-    internal func test_nonEmpty_withNilString() {
+    func test_nonEmpty_withNilString() {
         let string: String? = nil
         
         XCTAssertEqual(string?.nonEmpty, nil)
     }
     
-    internal func test_separate() {
+    func test_separate() {
         let string = "Hello"
         
         XCTAssertEqual(string.separate(with: "World", offset: 6), "Hello World")
     }
     
-    internal func test_string_nonEmptyArray() {
+    func test_string_nonEmptyArray() {
         let array = ["Apple", "Banana", "Orange"]
         
         XCTAssertEqual(array.stringValue(), "Apple, Banana, Orange")
     }
     
-    internal func test_string_emptyArray() {
+    func test_string_emptyArray() {
         let array: [String] = []
         
         XCTAssertEqual(array.stringValue(), "")
     }
     
-    internal func test_withoutPrefix_withValidString() {
+    func test_withoutPrefix_withValidString() {
         let string = "$10.000"
         
         XCTAssertEqual(string.withoutPrefix("$"), "10.000")
@@ -101,7 +101,7 @@ internal final class StringTests: XCTestCase {
         XCTAssertEqual(string.withoutPrefix("$", replaceWith: "Rp"), "Rp10.000")
     }
     
-    internal func test_withoutPrefix_withEmptyString() {
+    func test_withoutPrefix_withEmptyString() {
         let string = ""
         
         XCTAssertEqual(string.withoutPrefix("$"), "")
@@ -110,7 +110,7 @@ internal final class StringTests: XCTestCase {
         XCTAssertEqual(string.withoutPrefix("$", replaceWith: "Rp"), "")
     }
     
-    internal func test_withoutSuffix_withValidString() {
+    func test_withoutSuffix_withValidString() {
         let string = "at last..."
         
         XCTAssertEqual(string.withoutSuffix("."), "at last..")
@@ -119,7 +119,7 @@ internal final class StringTests: XCTestCase {
         XCTAssertEqual(string.withoutSuffix("...", replaceWith: "___"), "at last___")
     }
     
-    internal func test_withoutSuffix_withEmptyString() {
+    func test_withoutSuffix_withEmptyString() {
         let string = ""
         
         XCTAssertEqual(string.withoutSuffix("$"), "")
@@ -128,7 +128,7 @@ internal final class StringTests: XCTestCase {
         XCTAssertEqual(string.withoutSuffix("...", replaceWith: "___"), "")
     }
     
-    internal func test_noWhiteSpace() {
+    func test_noWhiteSpace() {
         let string = "this is whitespace"
         let noWhiteSpace = "hello"
         let capitalizedString = "BetterMVVM"
@@ -146,7 +146,7 @@ internal final class StringTests: XCTestCase {
         XCTAssertEqual(capitalizedString.noWhiteSpace(replace: .snakeCase), "BetterMVVM")
     }
     
-    internal func test_capitalizeFirstLetter() {
+    func test_capitalizeFirstLetter() {
         let string = "wendy"
         let already = "String"
         
