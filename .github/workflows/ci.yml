@@ -22,7 +22,22 @@ jobs:
       - name: Select Xcode ${{ matrix.xcode }}
         run: sudo xcode-select -s /Applications/Xcode_${{ matrix.xcode }}.app
       - name: Run tests
-        run: swift test 2>&1 | xcpretty
+        run: swift test --enable-test-discovery --enable-code-coverage 2>&1 | xcpretty
+      - name: Convert profdata to LCOV
+        run: |
+          xcrun llvm-cov export -format lcov \
+            --ignore-filename-regex='/(\.build|Tests|Sources|Snapshots|PerformanceTests)/' \
+            -instr-profile=$(dirname $(swift test --show-codecov-path))/default.profdata \
+            $(swift build --show-bin-path)/SwiftKitPackageTests.xctest/Contents/MacOS/SwiftKitPackageTests \
+            >coverage.lcov
+      - name: Codecov
+        uses: codecov/codecov-action@v2
+        with:
+          token: ${{ secrets.CODECOV_TOKEN }}
+          files: coverage.lcov
+          verbose: true
+          flags: macos-11 xcode${{ matrix.xcode }}
+          env_vars: MD_APPLE_SDK_ROOT,RUNNER_OS,RUNNER_ARCH
   windows:
     runs-on: windows-2019
     strategy:
@@ -40,7 +55,6 @@ jobs:
     strategy:
       matrix:
         swift:
-          - swift:5.1-bionic
           - swift:5.2-focal
           - swift:5.3-focal
           - swift:5.4-focal
@@ -52,4 +66,19 @@ jobs:
     steps:
       - uses: actions/checkout@v2
       - name: Run tests
-        run: swift test
+        run: swift test --enable-test-discovery --enable-code-coverage
+      - name: Convert profdata to LCOV
+        run: |
+          llvm-cov export -format lcov \
+            --ignore-filename-regex='/(\.build|Tests|Sources|Snapshots|PerformanceTests)/' \
+            -instr-profile=$(dirname $(swift test --show-codecov-path))/default.profdata \
+            $(swift build --show-bin-path)/SwiftKitPackageTests.xctest \
+            >coverage.lcov
+      - name: Codecov
+        uses: codecov/codecov-action@v2
+        with:
+          token: ${{ secrets.CODECOV_TOKEN }}
+          files: coverage.lcov
+          verbose: true
+          flags: ubuntu-20.04 swift${{ matrix.swift }}
+          env_vars: SWIFT_VERSION,SWIFT_PLATFORM,RUNNER_OS,RUNNER_ARCH
