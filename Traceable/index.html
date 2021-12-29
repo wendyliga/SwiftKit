@@ -1,0 +1,268 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SwiftKit - Traceable</title>
+    <link rel="stylesheet" type="text/css" href="/SwiftKit/all.css" media="all" />
+</head>
+<body>
+    <header>
+        <a href="/SwiftKit">
+            <strong>
+                SwiftKit
+            </strong>
+            <span>Documentation</span>
+        </a>
+    </header>
+
+    <!--
+    <form class="search">
+        <input type="search" placeholder="Search" />
+    </form>
+    -->
+
+    <nav>
+        <div class="wrapper">
+            <h2>On This Page</h2>
+            <ol><li><a href="#initializers">Initializers</a><ul><li class="initializer"><a href="#traceable.init(wrappedvalue:maxsize:)">init(wrapped​Value:​max​Size:​)</a></li></ul></li><li><a href="#properties">Properties</a><ul><li class="variable"><a href="#traceable.wrappedvalue">wrapped​Value</a></li></ul></li><li><a href="#methods">Methods</a><ul><li class="function"><a href="#traceable.revert()">revert()</a></li><li class="function"><a href="#traceable.checkout(_:)">checkout(_:​)</a></li><li class="function"><a href="#traceable.flush()">flush()</a></li><li class="function"><a href="#traceable.first()">first()</a></li><li class="function"><a href="#traceable.first(where:)">first(where:​)</a></li><li class="function"><a href="#traceable.last()">last()</a></li><li class="function"><a href="#traceable.last(where:)">last(where:​)</a></li><li class="function"><a href="#traceable.all()">all()</a></li></ul></li></ol>
+        </div>
+    </nav>
+
+    <main>
+        <article>
+            <h1>
+    <small>Structure</small>
+    <code class="name">Traceable</code>
+</h1>
+
+<div class="declaration">
+<pre class="highlight"><code><html><body><span class="attribute">@</span><span class="attribute">propertyWrapper</span>
+<span class="keyword">public</span> <span class="keyword">struct</span> <span class="type">Traceable</span>&lt;<span class="variable">Type</span>&gt;  </body></html></code></pre>
+</div>
+<div class="summary" role="doc-abstract">
+    <p>Add ability to type to have traceable history.
+property with this propertyWrapper will automatically have version. if propery is set, the set value will enter history.</p>
+
+</div>
+<div class="discussion">
+    <p>example</p>
+
+<html><body><pre class="highlight"><code><span class="keyword">struct</span> <span class="type">User</span> {
+    <span class="attribute">@</span><span class="type">Traceable</span>
+    <span class="keyword">var</span> <span class="variable">name</span>: <span class="type">String</span>
+}
+</code></pre></body></html>
+<p>to see more, check <code>Traceable+Tests.swift</code></p>
+
+</div>
+
+    <section id="initializers">
+        <h2>Initializers</h2>
+
+        <div role="article" class="initializer" id="traceable.init(wrappedvalue:maxsize:)">
+    <h3>
+        <code><a href="#traceable.init(wrappedvalue:maxsize:)">init(wrapped​Value:​max​Size:​)</a></code>
+    </h3>
+    <div class="declaration">
+<pre class="highlight"><code><html><body><span class="keyword">public</span> <span class="keyword">init</span>(<span class="variable">wrappedValue</span>: <span class="type">Type</span>, <span class="variable">maxSize</span>: <span class="type">Int</span> = <span class="number literal">50</span>)  </body></html></code></pre>
+</div>
+</div>
+    </section>
+    <section id="properties">
+        <h2>Properties</h2>
+
+        <div role="article" class="variable" id="traceable.wrappedvalue">
+    <h3>
+        <code><a href="#traceable.wrappedvalue">wrapped​Value</a></code>
+    </h3>
+    <div class="declaration">
+<pre class="highlight"><code><html><body><span class="keyword">public</span> <span class="keyword">var</span> <span class="variable">wrappedValue</span>: <span class="type">Type</span>  </body></html></code></pre>
+</div>
+</div>
+    </section>
+    <section id="methods">
+        <h2>Methods</h2>
+
+        <div role="article" class="function" id="traceable.revert()">
+    <h3>
+        <code><a href="#traceable.revert()">revert()</a></code>
+    </h3>
+    <div class="declaration">
+<pre class="highlight"><code><html><body><span class="keyword">public</span> <span class="attribute">mutating</span> <span class="keyword">func</span> <span class="function">revert</span>()  </body></html></code></pre>
+</div>
+<div class="summary" role="doc-abstract">
+    <p>Remove last history</p>
+
+</div>
+</div>
+<div role="article" class="function" id="traceable.checkout(_:)">
+    <h3>
+        <code><a href="#traceable.checkout(_:)">checkout(_:​)</a></code>
+    </h3>
+    <div class="declaration">
+<pre class="highlight"><code><html><body><span class="keyword">public</span> <span class="attribute">mutating</span> <span class="keyword">func</span> <span class="function">checkout</span>(<span class="keyword">_</span> <span class="variable">cursor</span>: <span class="type">Int</span>)  </body></html></code></pre>
+</div>
+<div class="summary" role="doc-abstract">
+    <p>Move cursor to spesific index</p>
+
+</div>
+<h4>Parameters</h4>
+
+<table class="parameters">
+  <thead hidden>
+  <tr>
+      <th>Name</th>
+      <th>Type</th>
+      <th>Description</th>
+  </tr>
+  </thead>
+  <tbody>
+    <tr>
+    <th>cursor</th>
+    <td><code class="type">Int</code></td>
+    <td><p>index of history</p>
+</td>
+</tr>
+  </tbody>
+</table>
+</div>
+<div role="article" class="function" id="traceable.flush()">
+    <h3>
+        <code><a href="#traceable.flush()">flush()</a></code>
+    </h3>
+    <div class="declaration">
+<pre class="highlight"><code><html><body><span class="keyword">public</span> <span class="attribute">mutating</span> <span class="keyword">func</span> <span class="function">flush</span>()  </body></html></code></pre>
+</div>
+<div class="summary" role="doc-abstract">
+    <p>Remove all history, and left 1 last element</p>
+
+</div>
+</div>
+<div role="article" class="function" id="traceable.first()">
+    <h3>
+        <code><a href="#traceable.first()">first()</a></code>
+    </h3>
+    <div class="declaration">
+<pre class="highlight"><code><html><body><span class="keyword">public</span> <span class="keyword">func</span> <span class="function">first</span>() -&gt; <span class="type">Type</span>?  </body></html></code></pre>
+</div>
+<div class="summary" role="doc-abstract">
+    <p>Get first history</p>
+
+</div>
+  <h4>Returns</h4>
+  <p>First history</p>
+
+</div>
+<div role="article" class="function" id="traceable.first(where:)">
+    <h3>
+        <code><a href="#traceable.first(where:)">first(where:​)</a></code>
+    </h3>
+    <div class="declaration">
+<pre class="highlight"><code><html><body><span class="keyword">public</span> <span class="keyword">func</span> <span class="function">first</span>(<span class="variable">where</span> <span class="variable">predicate</span>: (<span class="type">Type</span>) <span class="keyword">throws</span> -&gt; <span class="type">Bool</span>) <span class="keyword">rethrows</span> -&gt; <span class="type">Type</span>?  </body></html></code></pre>
+</div>
+<div class="summary" role="doc-abstract">
+    <p>Get first item that meet condition</p>
+
+</div>
+<h4>Parameters</h4>
+
+<table class="parameters">
+  <thead hidden>
+  <tr>
+      <th>Name</th>
+      <th>Type</th>
+      <th>Description</th>
+  </tr>
+  </thead>
+  <tbody>
+    <tr>
+    <th>predicate</th>
+    <td><code class="type">(Type) throws -&gt; Bool</code></td>
+    <td><p>Condition, if true, will return spesific history</p>
+</td>
+</tr>
+  </tbody>
+</table>
+  <h4>Returns</h4>
+  <p>History that meet given condition</p>
+
+</div>
+<div role="article" class="function" id="traceable.last()">
+    <h3>
+        <code><a href="#traceable.last()">last()</a></code>
+    </h3>
+    <div class="declaration">
+<pre class="highlight"><code><html><body><span class="keyword">public</span> <span class="keyword">func</span> <span class="function">last</span>() -&gt; <span class="type">Type</span>?  </body></html></code></pre>
+</div>
+<div class="summary" role="doc-abstract">
+    <p>Get last history</p>
+
+</div>
+  <h4>Returns</h4>
+  <p>Last history</p>
+
+</div>
+<div role="article" class="function" id="traceable.last(where:)">
+    <h3>
+        <code><a href="#traceable.last(where:)">last(where:​)</a></code>
+    </h3>
+    <div class="declaration">
+<pre class="highlight"><code><html><body><span class="keyword">public</span> <span class="keyword">func</span> <span class="function">last</span>(<span class="variable">where</span> <span class="variable">predicate</span>: (<span class="type">Type</span>) <span class="keyword">throws</span> -&gt; <span class="type">Bool</span>) <span class="keyword">rethrows</span> -&gt; <span class="type">Type</span>?  </body></html></code></pre>
+</div>
+<div class="summary" role="doc-abstract">
+    <p>Get last item that meet condition</p>
+
+</div>
+<h4>Parameters</h4>
+
+<table class="parameters">
+  <thead hidden>
+  <tr>
+      <th>Name</th>
+      <th>Type</th>
+      <th>Description</th>
+  </tr>
+  </thead>
+  <tbody>
+    <tr>
+    <th>predicate</th>
+    <td><code class="type">(Type) throws -&gt; Bool</code></td>
+    <td><p>Condition, if true, will return spesific history</p>
+</td>
+</tr>
+  </tbody>
+</table>
+  <h4>Returns</h4>
+  <p>History that meet given condition</p>
+
+</div>
+<div role="article" class="function" id="traceable.all()">
+    <h3>
+        <code><a href="#traceable.all()">all()</a></code>
+    </h3>
+    <div class="declaration">
+<pre class="highlight"><code><html><body><span class="keyword">public</span> <span class="keyword">func</span> <span class="function">all</span>() -&gt; [<span class="type">Type</span>]  </body></html></code></pre>
+</div>
+<div class="summary" role="doc-abstract">
+    <p>Get all version</p>
+
+</div>
+  <h4>Returns</h4>
+  <p>All version on current value</p>
+
+</div>
+    </section>
+
+
+
+        </article>
+    </main>
+
+    <footer>
+        <p>
+    Generated on <time datetime="2021-12-29T10:19:04+0000">December 29, 2021</time> using <a href="https://github.com/SwiftDocOrg/swift-doc">swift-doc</a> <span class="version">1.0.0-rc.1</span>.
+</p>
+    </footer>
+</body>
+</html>
