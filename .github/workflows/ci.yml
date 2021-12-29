@@ -58,7 +58,7 @@ jobs:
           llvm-cov export -format lcov \
             --ignore-filename-regex='/(\.build|Tests|Sources|Snapshots|PerformanceTests)/' \
             -instr-profile=$(dirname $(swift test --show-codecov-path))/default.profdata \
-            $(swift build --show-bin-path)/SwiftkitPackageTests.xctest \
+            $(swift build --show-bin-path)/SwiftKitPackageTests.xctest \
             >coverage.lcov
       - name: Codecov
         uses: codecov/codecov-action@v2
