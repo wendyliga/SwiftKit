@@ -26,7 +26,6 @@ jobs:
       - name: Convert profdata to LCOV
         run: |
           xcrun llvm-cov export -format lcov \
-            --ignore-filename-regex='/(\.build|Tests|Sources|Snapshots|PerformanceTests)/' \
             -instr-profile=$(dirname $(swift test --show-codecov-path))/default.profdata \
             $(swift build --show-bin-path)/SwiftKitPackageTests.xctest/Contents/MacOS/SwiftKitPackageTests \
             >coverage.lcov
@@ -70,7 +69,6 @@ jobs:
       - name: Convert profdata to LCOV
         run: |
           llvm-cov export -format lcov \
-            --ignore-filename-regex='/(\.build|Tests|Sources|Snapshots|PerformanceTests)/' \
             -instr-profile=$(dirname $(swift test --show-codecov-path))/default.profdata \
             $(swift build --show-bin-path)/SwiftKitPackageTests.xctest \
             >coverage.lcov
