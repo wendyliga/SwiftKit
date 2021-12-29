@@ -131,6 +131,7 @@ internal final class StringTests: XCTestCase {
     internal func test_noWhiteSpace() {
         let string = "this is whitespace"
         let noWhiteSpace = "hello"
+        let capitalizedString = "BetterMVVM"
         
         XCTAssertEqual(string.noWhiteSpace(replace: .none), "thisiswhitespace")
         XCTAssertEqual(string.noWhiteSpace(replace: .camelCase), "ThisIsWhitespace")
@@ -139,6 +140,10 @@ internal final class StringTests: XCTestCase {
         XCTAssertEqual(noWhiteSpace.noWhiteSpace(replace: .none), "hello")
         XCTAssertEqual(noWhiteSpace.noWhiteSpace(replace: .camelCase), "Hello")
         XCTAssertEqual(noWhiteSpace.noWhiteSpace(replace: .snakeCase), "hello")
+        
+        XCTAssertEqual(capitalizedString.noWhiteSpace(replace: .none), "BetterMVVM")
+        XCTAssertEqual(capitalizedString.noWhiteSpace(replace: .camelCase), "BetterMVVM")
+        XCTAssertEqual(capitalizedString.noWhiteSpace(replace: .snakeCase), "BetterMVVM")
     }
     
     internal func test_capitalizeFirstLetter() {

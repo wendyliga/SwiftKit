@@ -1,8 +1,0 @@
-matrix:
-  include:
-    - os: osx
-      osx_image: xcode11
-      sudo: required
-
-script:
-    - swift test

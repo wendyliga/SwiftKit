@@ -22,48 +22,41 @@
  SOFTWARE.
  */
 
-extension Result {
-    /// Get non success Result, if current Result is success return nil, if not return self
-    public var nonSuccessResult: Self? {
-        if case .failure(_) = self {
-            return self
-        }
+import XCTest
+@testable import SwiftKit
+
+internal final class NonEmptyTests: XCTestCase {
+    internal static var allTests = [
+        ("test_non_empty_fulfilled", test_non_empty_fulfilled),
+        ("test_non_empty_not_fulfilled", test_non_empty_not_fulfilled),
+        ("test_non_empty_equatable", test_non_empty_equatable),
+        ("test_non_empty_hashable", test_non_empty_hashable)
+    ]
+  
+    internal struct User {
+        @NonEmpty
+        var email: String?
+    }
+    
+    internal func test_non_empty_fulfilled() {
+        let user = User(email: "")
+        XCTAssertEqual(user.email, nil)
+    }
+    
+    internal func test_non_empty_not_fulfilled() {
+        let user = User(email: "user@email.com")
+        XCTAssertEqual(user.email, "user@email.com")
+    }
+    
+    internal func test_non_empty_equatable() {
+        let user = User(email: "user@email.com")
+        XCTAssertEqual(user.email, "user@email.com")
+    }
+    
+    internal func test_non_empty_hashable() {
+        let rawString: String? = "hello_world"
+        let user = User(email: "hello_world")
         
-        return nil
-    }
-    
-    /// Get non failure Result, if current Result is failure return nil, if not return self
-    public var nonFailureResult: Self? {
-        if case .success(_) = self {
-            return self
-        }
-        
-        return nil
-    }
-    
-    /// Force get value from Result, make sure you make sure your Result is not failure.
-    public var value: Success! {
-        return try! self.get()
-    }
-    
-    /// Get error value from Result
-    public var error: Error! {
-        do {
-            let result = try self.get()
-            
-            assertionFailure("\(result) is not failure")
-            return GeneralError.unidentifiedError
-        } catch let error {
-            return error
-        }
-    }
-    
-    /// Get result value and discard the returnable value
-    ///
-    /// This function is wrapper of `get` function with discardable result
-    @discardableResult
-    public func getAndForget() throws -> Success {
-        try get()
+        XCTAssertEqual(rawString.hashValue, user.email.hashValue)
     }
 }
-

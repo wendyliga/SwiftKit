@@ -1,0 +1,15 @@
+{
+    "configurations": [
+        {
+            "type": "lldb",
+            "request": "launch",
+            "name": "Test SwiftKit",
+            "program": "/Applications/Xcode.app/Contents/Developer/usr/bin/xctest",
+            "args": [
+                ".build/debug/SwiftKitPackageTests.xctest"
+            ],
+            "cwd": "${workspaceFolder:SwiftKit}",
+            "preLaunchTask": "swift: Build All"
+        }
+    ]
+}
