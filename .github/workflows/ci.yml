@@ -25,7 +25,7 @@ jobs:
         run: swift test --enable-test-discovery --enable-code-coverage 2>&1 | xcpretty
       - name: Convert profdata to LCOV
         run: |
-          llvm-cov export -format lcov \
+          xcrun llvm-cov export -format lcov \
             --ignore-filename-regex='/(\.build|Tests|Sources|Snapshots|PerformanceTests)/' \
             -instr-profile=$(dirname $(swift test --show-codecov-path))/default.profdata \
             $(swift build --show-bin-path)/SwiftKitPackageTests.xctest \
