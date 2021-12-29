@@ -34,7 +34,7 @@ jobs:
           - swift:5.5
           - swiftlang/swift:nightly-main
         distro:
-          -focal
+          - focal
     container: 
       image: ${{ format('{0}-{1}', matrix.swift, matrix.distro) }}
       options: --cap-add=SYS_PTRACE --security-opt seccomp=unconfined --security-opt apparmor=unconfined
