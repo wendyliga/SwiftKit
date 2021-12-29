@@ -33,7 +33,7 @@ jobs:
           - swift:5.4-focal
           - swift:5.5-focal
     container: 
-      image: ${{ matrix.swift) }}
+      image: ${{ matrix.swift }}
       options: --cap-add=SYS_PTRACE --security-opt seccomp=unconfined --security-opt apparmor=unconfined
     runs-on: ubuntu-20.04
     steps:
