@@ -1,9 +1,17 @@
 name: Documentation
+# on:
+#   release:
+#     types:
+#       - published
+#   workflow_dispatch:
+
 on:
-  release:
-    types:
-      - published
-  workflow_dispatch:
+  push:
+    branches:
+      - main
+  pull_request:
+    branches:
+      - '*'
 
 jobs:
   build:
