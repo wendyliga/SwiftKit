@@ -27,12 +27,13 @@ jobs:
           -destination 'platform=OS X,arch=x86_64' \
           -enableCodeCoverage YES \
           -derivedDataPath .build/derivedData \
+          -sdk macosx \
           clean test | xcpretty
       - name: Codecov
         uses: codecov/codecov-action@v2
         with:
           token: ${{ secrets.CODECOV_TOKEN }}
-          directory: .build/derivedData
+          directory: .
           verbose: true
           env_vars: MD_APPLE_SDK_ROOT,RUNNER_OS,RUNNER_ARCH
       - name: Upload
@@ -54,7 +55,6 @@ jobs:
     strategy:
       matrix:
         swift:
-          - swift:5.1-bionic
           - swift:5.2-focal
           - swift:5.3-focal
           - swift:5.4-focal
@@ -66,7 +66,7 @@ jobs:
     steps:
       - uses: actions/checkout@v2
       - name: Run tests
-        run: swift test --enable-code-coverage
+        run: swift test --enable-test-discovery --enable-code-coverage
       - name: Convert profdata to LCOV
         run: |
           llvm-cov export -format lcov \
@@ -79,4 +79,5 @@ jobs:
         with:
           token: ${{ secrets.CODECOV_TOKEN }}
           files: coverage.lcov
+          verbose: true
           env_vars: SWIFT_VERSION,SWIFT_PLATFORM,RUNNER_OS,RUNNER_ARCH
