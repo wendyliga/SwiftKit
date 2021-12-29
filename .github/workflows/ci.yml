@@ -52,4 +52,17 @@ jobs:
     steps:
       - uses: actions/checkout@v2
       - name: Run tests
-        run: swift test
+        run: swift test --enable-code-coverage
+      - name: Convert profdata to LCOV
+          run: |
+            llvm-cov export -format lcov \
+              --ignore-filename-regex='/(\.build|Tests|Sources|Snapshots|PerformanceTests)/' \
+              -instr-profile=$(dirname $(swift test --show-codecov-path))/default.profdata \
+              $(swift build --show-bin-path)/SwiftFormatPackageTests.xctest \
+              >coverage.lcov
+      - name: Codecov
+        uses: codecov/codecov-action@v2
+        with:
+          token: ${{ secrets.CODECOV_TOKEN }}
+          files: coverage.lcov
+          env_vars: SWIFT_VERSION,SWIFT_PLATFORM,RUNNER_OS,RUNNER_ARCH
