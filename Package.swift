@@ -9,13 +9,22 @@ let package = Package(
         .library(
             name: "SwiftKit",
             targets: ["SwiftKit"]),
+        .library(
+            name: "ShellKit",
+            targets: ["ShellKit"]),
     ],
     targets: [
         .target(
             name: "SwiftKit",
-            dependencies: []),
+            dependencies: []
+        ),
+        .target(
+            name: "ShellKit",
+            dependencies: ["SwiftKit"]
+        ),
         .testTarget(
             name: "SwiftKitTests",
-            dependencies: ["SwiftKit"]),
+            dependencies: ["SwiftKit"]
+        ),
     ]
 )

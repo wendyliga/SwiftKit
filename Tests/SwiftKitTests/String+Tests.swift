@@ -153,4 +153,17 @@ final class StringTests: XCTestCase {
         XCTAssertEqual(string.capitalizeFirstLetter(), "Wendy")
         XCTAssertEqual(already.capitalizeFirstLetter(), "String")
     }
+    
+    func test_trim() {
+        let whiteSpace = " hello world "
+        let multiline = """
+        hello world
+        hello world
+        """
+        let already = "String"
+        
+        XCTAssertEqual(whiteSpace.trim(), "hello world")
+        XCTAssertEqual(multiline.trim(), "hello world\nhello world")
+        XCTAssertEqual(already.trim(), "String")
+    }
 }
