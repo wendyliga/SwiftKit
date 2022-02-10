@@ -23,7 +23,6 @@
  */
 
 import Foundation
-import SwiftKit
 
 public enum Shell {
     public typealias Result = (status: Int32, output: String?, errorOuput: String?)
