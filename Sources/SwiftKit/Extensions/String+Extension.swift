@@ -197,6 +197,13 @@ extension String {
     public func capitalizeFirstLetter() -> String {
         return prefix(1).uppercased() + self.dropFirst()
     }
+    
+    /**
+     Trim string
+     */
+    public func trim() -> String {
+        return self.trimmingCharacters(in: CharacterSet.whitespacesAndNewlines)
+    }
 }
 
 extension Array where Element == String {
