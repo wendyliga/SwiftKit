@@ -28,16 +28,21 @@ public enum Shell {
     public typealias Result = (status: Int32, output: String?, errorOuput: String?)
     public typealias ResultStream = (output: String?, errorOuput: String?)
     public typealias TerminationStatus = Int32
-
+    
     @discardableResult
-    public static func execute(
+    private static func _execute(
         launchPath: String = "/usr/bin/env",
+        currentDirectoryURL: URL? = nil,
         arguments: [String],
         stream result: @escaping (Shell.ResultStream) -> Void
     ) -> Shell.TerminationStatus {
         let task = Process()
         task.launchPath = launchPath
         task.arguments = arguments
+        
+        if #available(macOS 10.13, *) {
+            task.currentDirectoryURL = currentDirectoryURL
+        }
 
         let pipe = Pipe()
         task.standardOutput = pipe
@@ -103,12 +108,38 @@ public enum Shell {
     @discardableResult
     public static func execute(
         launchPath: String = "/usr/bin/env",
+        arguments: [String],
+        stream result: @escaping (Shell.ResultStream) -> Void
+    ) -> Shell.TerminationStatus {
+        _execute(launchPath: launchPath, arguments: arguments, stream: result)
+    }
+    
+    
+    @available(macOS 10.13, *)
+    @discardableResult
+    public static func execute(
+        launchPath: String = "/usr/bin/env",
+        currentDirectoryURL: URL?,
+        arguments: [String],
+        stream result: @escaping (Shell.ResultStream) -> Void
+    ) -> Shell.TerminationStatus {
+        _execute(
+            launchPath: launchPath,
+            currentDirectoryURL: currentDirectoryURL,
+            arguments: arguments,
+            stream: result
+        )
+    }
+    
+    @discardableResult
+    public static func execute(
+        launchPath: String = "/usr/bin/env",
         arguments: [String]
     ) -> Shell.Result {
         var outputs = [String]()
         var errors = [String]()
         
-        let terminationStatus = Shell.execute(launchPath: launchPath, arguments: arguments) { (output, error) in
+        let terminationStatus = Shell._execute(launchPath: launchPath, arguments: arguments) { (output, error) in
             if let output = output {
                 outputs.append(output)
             }
