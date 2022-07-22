@@ -45,7 +45,7 @@ public enum ConsoleLog {
     ///   - value: error log
     ///   - _prefix: the prefix before the log, by default `Error: my error message`
     ///   - _prefixColor: ANSI color for the prefix
-    static func error(_ value: String, prefix _prefix: String? = "Error", _prefixColor: ANSIColor = .red) {
+    public static func error(_ value: String, prefix _prefix: String? = "Error", _prefixColor: ANSIColor = .red) {
         var prefix = ""
         if let _prefix = _prefix {
             prefix += _prefixColor.rawValue + _prefix + ANSIColor.clear.rawValue + ": "
@@ -59,7 +59,7 @@ public enum ConsoleLog {
     ///   - value: debug message
     ///   - _prefix: the prefix before the log, example `Foo: my message`
     ///   - _prefixColor: ANSI color for the prefix
-    static func debug(_ value: String, prefix _prefix: String? = nil, _prefixColor: ANSIColor = .green) {
+    public static func debug(_ value: String, prefix _prefix: String? = nil, _prefixColor: ANSIColor = .green) {
         var prefix = ""
         if let _prefix = _prefix {
             prefix += _prefixColor.rawValue + _prefix + ANSIColor.clear.rawValue + ": "
