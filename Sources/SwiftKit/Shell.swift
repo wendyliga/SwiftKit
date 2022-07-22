@@ -105,21 +105,11 @@ public enum Shell {
         return task.terminationStatus
     }
     
-    @discardableResult
-    public static func execute(
-        launchPath: String = "/usr/bin/env",
-        arguments: [String],
-        stream result: @escaping (Shell.ResultStream) -> Void
-    ) -> Shell.TerminationStatus {
-        _execute(launchPath: launchPath, arguments: arguments, stream: result)
-    }
-    
-    
     @available(macOS 10.13, *)
     @discardableResult
     public static func execute(
         launchPath: String = "/usr/bin/env",
-        currentDirectoryURL: URL?,
+        currentDirectoryURL: URL? = nil,
         arguments: [String],
         stream result: @escaping (Shell.ResultStream) -> Void
     ) -> Shell.TerminationStatus {
@@ -134,12 +124,17 @@ public enum Shell {
     @discardableResult
     public static func execute(
         launchPath: String = "/usr/bin/env",
+        currentDirectoryURL: URL? = nil,
         arguments: [String]
     ) -> Shell.Result {
         var outputs = [String]()
         var errors = [String]()
         
-        let terminationStatus = Shell._execute(launchPath: launchPath, arguments: arguments) { (output, error) in
+        let terminationStatus = Shell._execute(
+            launchPath: launchPath,
+            currentDirectoryURL: currentDirectoryURL,
+            arguments: arguments
+        ) { (output, error) in
             if let output = output {
                 outputs.append(output)
             }
