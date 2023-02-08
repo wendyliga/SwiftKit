@@ -37,11 +37,13 @@ public enum Shell {
         stream result: @escaping (Shell.ResultStream) -> Void
     ) -> Shell.TerminationStatus {
         let task = Process()
-        task.executableURL = executableURL
         task.arguments = arguments
         
         if #available(macOS 10.13, *) {
             task.currentDirectoryURL = currentDirectoryURL
+            task.executableURL = executableURL
+        } else {
+            task.launchPath = executableURL?.absoluteString ?? ""
         }
 
         let pipe = Pipe()
