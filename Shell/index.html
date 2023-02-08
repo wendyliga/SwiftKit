@@ -25,7 +25,7 @@
     <nav>
         <div class="wrapper">
             <h2>On This Page</h2>
-            <ol><li><a href="#nested type aliases">Nested Type Aliases</a><ul><li class="typealias"><a href="#shell.result">Result</a></li><li class="typealias"><a href="#shell.resultstream">Result​Stream</a></li><li class="typealias"><a href="#shell.terminationstatus">Termination​Status</a></li></ul></li><li><a href="#methods">Methods</a><ul><li class="function"><a href="#shell.execute(launchpath:currentdirectoryurl:arguments:stream:)">execute(launch​Path:​current​Directory​URL:​arguments:​stream:​)</a></li><li class="function"><a href="#shell.execute(launchpath:currentdirectoryurl:arguments:)">execute(launch​Path:​current​Directory​URL:​arguments:​)</a></li></ul></li></ol>
+            <ol><li><a href="#nested type aliases">Nested Type Aliases</a><ul><li class="typealias"><a href="#shell.result">Result</a></li><li class="typealias"><a href="#shell.resultstream">Result​Stream</a></li><li class="typealias"><a href="#shell.terminationstatus">Termination​Status</a></li></ul></li><li><a href="#methods">Methods</a><ul><li class="function"><a href="#shell.execute(launchpath:currentdirectoryurl:arguments:stream:)">execute(launch​Path:​current​Directory​URL:​arguments:​stream:​)</a></li><li class="function"><a href="#shell.execute(launchpath:currentdirectoryurl:arguments:)">execute(launch​Path:​current​Directory​URL:​arguments:​)</a></li><li class="function"><a href="#shell.execute(executableurl:currentdirectoryurl:arguments:stream:)">execute(executable​URL:​current​Directory​URL:​arguments:​stream:​)</a></li><li class="function"><a href="#shell.execute(executableurl:currentdirectoryurl:arguments:)">execute(executable​URL:​current​Directory​URL:​arguments:​)</a></li></ul></li></ol>
         </div>
     </nav>
 
@@ -77,9 +77,10 @@
     </h3>
     <div class="declaration">
 <pre class="highlight"><code><html><body><span class="attribute">@</span><span class="attribute">available</span>(<span class="keyword">macOS</span> <span class="number literal">10.13</span>, *)
+    <span class="attribute">@</span><span class="attribute">available</span>(*, <span class="variable">deprecated</span>, <span class="variable">message</span>: <span class="string literal">"use execute with 'executableURL'"</span>)
     <span class="attribute">@</span><span class="attribute">discardableResult</span>
     <span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">func</span> <span class="function">execute</span>(
-        <span class="variable">launchPath</span>: <span class="type">String</span> = <span class="string literal">"</span><span class="string literal">/usr/bin/env</span><span class="string literal">"</span>,
+        <span class="variable">launchPath</span>: <span class="type">String</span>,
         <span class="variable">currentDirectoryURL</span>: <span class="type">URL</span>? = <span class="keyword">nil</span>,
         <span class="variable">arguments</span>: [<span class="type">String</span>],
         <span class="variable">stream</span> <span class="variable">result</span>: <span class="attribute">@</span><span class="attribute">escaping</span> (<a href="/SwiftKit/Shell"><span class="type">Shell</span></a>.<span class="type">ResultStream</span>) -&gt; <span class="type">Void</span>
@@ -91,9 +92,40 @@
         <code><a href="#shell.execute(launchpath:currentdirectoryurl:arguments:)">execute(launch​Path:​current​Directory​URL:​arguments:​)</a></code>
     </h3>
     <div class="declaration">
-<pre class="highlight"><code><html><body><span class="attribute">@</span><span class="attribute">discardableResult</span>
+<pre class="highlight"><code><html><body><span class="attribute">@</span><span class="attribute">available</span>(<span class="keyword">macOS</span> <span class="number literal">10.13</span>, *)
+    <span class="attribute">@</span><span class="attribute">discardableResult</span>
+    <span class="attribute">@</span><span class="attribute">available</span>(*, <span class="variable">deprecated</span>, <span class="variable">message</span>: <span class="string literal">"use execute with 'executableURL'"</span>)
     <span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">func</span> <span class="function">execute</span>(
-        <span class="variable">launchPath</span>: <span class="type">String</span> = <span class="string literal">"</span><span class="string literal">/usr/bin/env</span><span class="string literal">"</span>,
+        <span class="variable">launchPath</span>: <span class="type">String</span>,
+        <span class="variable">currentDirectoryURL</span>: <span class="type">URL</span>? = <span class="keyword">nil</span>,
+        <span class="variable">arguments</span>: [<span class="type">String</span>]
+    ) -&gt; <a href="/SwiftKit/Shell"><span class="type">Shell</span></a>.<span class="type">Result</span>  </body></html></code></pre>
+</div>
+</div>
+<div role="article" class="function" id="shell.execute(executableurl:currentdirectoryurl:arguments:stream:)">
+    <h3>
+        <code><a href="#shell.execute(executableurl:currentdirectoryurl:arguments:stream:)">execute(executable​URL:​current​Directory​URL:​arguments:​stream:​)</a></code>
+    </h3>
+    <div class="declaration">
+<pre class="highlight"><code><html><body><span class="attribute">@</span><span class="attribute">available</span>(<span class="keyword">macOS</span> <span class="number literal">10.13</span>, *)
+    <span class="attribute">@</span><span class="attribute">discardableResult</span>
+    <span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">func</span> <span class="function">execute</span>(
+        <span class="variable">executableURL</span>: <span class="type">URL</span>? = <span class="variable">URL</span>(<span class="variable">fileURLWithPath</span>: <span class="string literal">"</span><span class="string literal">/bin/zsh</span><span class="string literal">"</span>),
+        <span class="variable">currentDirectoryURL</span>: <span class="type">URL</span>? = <span class="keyword">nil</span>,
+        <span class="variable">arguments</span>: [<span class="type">String</span>],
+        <span class="variable">stream</span> <span class="variable">result</span>: <span class="attribute">@</span><span class="attribute">escaping</span> (<a href="/SwiftKit/Shell"><span class="type">Shell</span></a>.<span class="type">ResultStream</span>) -&gt; <span class="type">Void</span>
+    ) -&gt; <a href="/SwiftKit/Shell"><span class="type">Shell</span></a>.<span class="type">TerminationStatus</span>  </body></html></code></pre>
+</div>
+</div>
+<div role="article" class="function" id="shell.execute(executableurl:currentdirectoryurl:arguments:)">
+    <h3>
+        <code><a href="#shell.execute(executableurl:currentdirectoryurl:arguments:)">execute(executable​URL:​current​Directory​URL:​arguments:​)</a></code>
+    </h3>
+    <div class="declaration">
+<pre class="highlight"><code><html><body><span class="attribute">@</span><span class="attribute">available</span>(<span class="keyword">macOS</span> <span class="number literal">10.13</span>, *)
+    <span class="attribute">@</span><span class="attribute">discardableResult</span>
+    <span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">func</span> <span class="function">execute</span>(
+        <span class="variable">executableURL</span>: <span class="type">URL</span>? = <span class="variable">URL</span>(<span class="variable">fileURLWithPath</span>: <span class="string literal">"</span><span class="string literal">/bin/zsh</span><span class="string literal">"</span>),
         <span class="variable">currentDirectoryURL</span>: <span class="type">URL</span>? = <span class="keyword">nil</span>,
         <span class="variable">arguments</span>: [<span class="type">String</span>]
     ) -&gt; <a href="/SwiftKit/Shell"><span class="type">Shell</span></a>.<span class="type">Result</span>  </body></html></code></pre>
@@ -108,7 +140,7 @@
 
     <footer>
         <p>
-    Generated on <time datetime="2022-07-22T07:04:47+0000">July 22, 2022</time> using <a href="https://github.com/SwiftDocOrg/swift-doc">swift-doc</a> <span class="version">1.0.0-rc.1</span>.
+    Generated on <time datetime="2023-02-08T08:57:01+0000">February 8, 2023</time> using <a href="https://github.com/SwiftDocOrg/swift-doc">swift-doc</a> <span class="version">1.0.0-rc.1</span>.
 </p>
     </footer>
 </body>
