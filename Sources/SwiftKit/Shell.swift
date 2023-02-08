@@ -31,13 +31,13 @@ public enum Shell {
     
     @discardableResult
     private static func _execute(
-        launchPath: String = "/usr/bin/env",
+        executableURL: URL? = URL(fileURLWithPath: "/bin/zsh"),
         currentDirectoryURL: URL? = nil,
         arguments: [String],
         stream result: @escaping (Shell.ResultStream) -> Void
     ) -> Shell.TerminationStatus {
         let task = Process()
-        task.launchPath = launchPath
+        task.executableURL = executableURL
         task.arguments = arguments
         
         if #available(macOS 10.13, *) {
@@ -55,10 +55,10 @@ public enum Shell {
         // set observer
         let stdOutReading = pipe.fileHandleForReading
         stdOutReading.waitForDataInBackgroundAndNotify()
-        
-        let stdErrReading = pipe.fileHandleForReading
+
+        let stdErrReading = errorPipe.fileHandleForReading
         stdErrReading.waitForDataInBackgroundAndNotify()
-        
+
         // set listener
         var stdOutObserver: NSObjectProtocol!
         stdOutObserver = NotificationCenter.default.addObserver(
@@ -72,14 +72,14 @@ public enum Shell {
                 if let output = String(data: data, encoding: String.Encoding.utf8) {
                     result((output: output.trim(), errorOuput: nil))
                 }
-                
+
                 stdOutReading.waitForDataInBackgroundAndNotify()
             } else {
                 // That means we've reached the end of the input.
                 NotificationCenter.default.removeObserver(stdOutObserver!)
             }
         }
-        
+
         var stdErrObserver: NSObjectProtocol!
         stdErrObserver = NotificationCenter.default.addObserver(
             forName: NSNotification.Name.NSFileHandleDataAvailable,
@@ -92,7 +92,7 @@ public enum Shell {
                 if let output = String(data: data, encoding: String.Encoding.utf8) {
                     result((output: nil, errorOuput: output.trim()))
                 }
-                
+
                 stdErrReading.waitForDataInBackgroundAndNotify()
             } else {
                 // That means we've reached the end of the input.
@@ -108,13 +108,13 @@ public enum Shell {
     @available(macOS 10.13, *)
     @discardableResult
     public static func execute(
-        launchPath: String = "/usr/bin/env",
+        executableURL: URL? = URL(fileURLWithPath: "/bin/zsh"),
         currentDirectoryURL: URL? = nil,
         arguments: [String],
         stream result: @escaping (Shell.ResultStream) -> Void
     ) -> Shell.TerminationStatus {
         _execute(
-            launchPath: launchPath,
+            executableURL: executableURL,
             currentDirectoryURL: currentDirectoryURL,
             arguments: arguments,
             stream: result
@@ -123,27 +123,27 @@ public enum Shell {
     
     @discardableResult
     public static func execute(
-        launchPath: String = "/usr/bin/env",
+        executableURL: URL? = URL(fileURLWithPath: "/bin/zsh"),
         currentDirectoryURL: URL? = nil,
         arguments: [String]
     ) -> Shell.Result {
         var outputs = [String]()
         var errors = [String]()
-        
+
         let terminationStatus = Shell._execute(
-            launchPath: launchPath,
+            executableURL: executableURL,
             currentDirectoryURL: currentDirectoryURL,
             arguments: arguments
         ) { (output, error) in
             if let output = output {
                 outputs.append(output)
             }
-            
+
             if let error = error {
                 errors.append(error)
             }
         }
-        
+
         return (
             status: terminationStatus,
             output: outputs.joined(separator: "\n"),
