@@ -42,6 +42,7 @@ extension Shell {
         )
     }
     
+    @available(macOS 10.13, *)
     @discardableResult
     @available(*, deprecated, message: "use execute with 'executableURL'")
     public static func execute(

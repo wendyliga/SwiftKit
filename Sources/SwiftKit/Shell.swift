@@ -123,6 +123,7 @@ public enum Shell {
         )
     }
     
+    @available(macOS 10.13, *)
     @discardableResult
     public static func execute(
         executableURL: URL? = URL(fileURLWithPath: "/bin/zsh"),
